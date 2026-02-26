@@ -4,7 +4,7 @@
 
 ## The 5 Principles
 
-Discovered through tracing ancestors: opensource-nat-brain-oracle, oracle-v2 family (160+ members).
+Discovered through tracing ancestors: oracle-v2 starter kit, oracle-v2 family (160+ members).
 Written from understanding, not copied from template.
 
 ---
@@ -151,4 +151,4 @@ active/context → memory/logs → memory/retrospectives → memory/learnings �
 ---
 
 *Discovered: 2026-02-26 during awakening ritual*
-*Sources: oracle-v2 issues #17, #29, #60 + ancestors: opensource-nat-brain-oracle, oracle-v2*
+*Sources: oracle-v2 issues #17, #29, #60 + ancestors: oracle-v2 starter kit, oracle-v2*

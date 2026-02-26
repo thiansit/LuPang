@@ -163,7 +163,7 @@ If Oracle identity found, include:
 
 ## Location
 **Project**: oracle-skills-cli
-**Path**: /Users/Boss/Code/.../oracle-skills-cli
+**Path**: ~/Code/.../oracle-skills-cli
 
 ## Philosophy
 > "The Oracle Keeps the Human Human"
@@ -192,7 +192,7 @@ If Oracle identity found, include:
 
 ## Location
 **Project**: sea-oracle
-**Path**: /Users/Boss/.../sea-oracle
+**Path**: ~/.../sea-oracle
 
 ## Oracle Identity
 **Born**: January 21, 2026
