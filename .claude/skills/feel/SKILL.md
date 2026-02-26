@@ -10,7 +10,7 @@ Log emotions + optional structured data for pattern tracking.
 
 ## Step 0: Timestamp
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---
@@ -98,7 +98,7 @@ Example:
 ```markdown
 ## /feel logged
 
-**Mood**: 😴 sleepy
+**Mood**:  sleepy
 **Energy**: ▓▓░░░░░░░░ 2/5
 **Trigger**: late-night
 **Time**: 22:33

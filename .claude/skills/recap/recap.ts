@@ -76,17 +76,17 @@ const date = now.toLocaleDateString('en', { day: '2-digit', month: 'short', year
 
 console.log("# RECAP");
 console.log("");
-console.log(`🕐 ${time} | ${date}`);
+console.log(`[${time}] ${date}`);
 console.log("");
 console.log("---");
 console.log("");
-console.log("## 🚧 FOCUS");
+console.log("## FOCUS");
 console.log(`\`${focusState}\` ${focusTask}`);
 console.log("");
-console.log("## 📅 TODAY");
+console.log("## TODAY");
 console.log(schedule);
 console.log("");
-console.log(`## 📊 GIT: ${branch} (+${ahead} ahead)`);
+console.log(`## GIT: ${branch} (+${ahead} ahead)`);
 console.log(`Last: ${lastCommit}`);
 console.log("");
 
@@ -104,6 +104,6 @@ if (untracked.length) {
 
 console.log("---");
 console.log("");
-console.log("## 📝 LAST SESSION");
+console.log("## LAST SESSION");
 console.log(`Retro: ${latestRetro}`);
 console.log(`Handoff: ${latestHandoff}`);

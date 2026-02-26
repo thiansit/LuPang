@@ -35,14 +35,14 @@ laris-co/oracle-v2: ~/Code/github.com/laris-co/oracle-v2
 ## Lifecycle
 
 ```
-/project search    → 🔍 Search repos (local ghq first, then GitHub API)
-/project learn     → 📚 Study external repo (psi/learn/)
-/project incubate  → 🌱 Work on project (psi/incubate/, auto-create if needed)
-/project spinoff   → 🎓 Graduate to own repo
-/project reunion   → 🤝 Sync learnings + offload
-/project offload   → 📤 Just remove symlinks
-/project index     → 🔮 Index manifests to Oracle
-/project history   → 📊 Git activity analysis
+/project search    →  Search repos (local ghq first, then GitHub API)
+/project learn     →  Study external repo (psi/learn/)
+/project incubate  →  Work on project (psi/incubate/, auto-create if needed)
+/project spinoff   →  Graduate to own repo
+/project reunion   →  Sync learnings + offload
+/project offload   →  Just remove symlinks
+/project index     →  Index manifests to Oracle
+/project history   →  Git activity analysis
 ```
 
 ## Limits

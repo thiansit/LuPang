@@ -17,7 +17,7 @@ description: v1.6.0 G-SKLL | Know ourselves - show identity, model info, session
 
 ## Step 0: Timestamp
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---

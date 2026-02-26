@@ -27,7 +27,7 @@ if (existsSync(scheduleFile)) {
     
     if (line.includes("free")) days[day] = { type: "free" };
     else if (line.includes("Done")) days[day] = { type: "done" };
-    else if (line.includes("✈️")) {
+    else if (line.includes("")) {
       const dest = line.match(/→([A-Z]+)/)?.[1];
       days[day] = { type: "flight", event: dest };
     }
@@ -66,7 +66,7 @@ for (const line of cal.split("\n")) {
     
     if (info) {
       switch (info.type) {
-        case "flight": annotations.push(`${day}✈️${info.event || ""}`); break;
+        case "flight": annotations.push(`${day}${info.event || ""}`); break;
         case "talk": annotations.push(`${day}:TALK`); break;
         case "blockmtn": annotations.push(`${day}:BlockMtn`); break;
         case "bitkub": annotations.push(`${day}:Bitkub`); break;

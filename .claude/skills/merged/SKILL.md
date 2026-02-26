@@ -47,7 +47,7 @@ git push origin --delete $BRANCH || echo "Remote branch already deleted"
 ### Step 4: Confirm cleanup
 
 ```bash
-echo "✅ Cleanup complete"
+echo " Cleanup complete"
 git branch -a | head -10
 git log --oneline -3
 ```
@@ -57,7 +57,7 @@ git log --oneline -3
 ## Output
 
 ```markdown
-## ✅ Post-Merge Cleanup
+## Post-Merge Cleanup
 
 - Switched to: `main`
 - Pulled latest: [commit hash]
@@ -81,7 +81,7 @@ PR merged on GitHub
         ↓
 /merged
         ↓
-✅ Back on main, branch cleaned up
+ Back on main, branch cleaned up
 ```
 
 ---

@@ -33,7 +33,7 @@ psi/memory/traces/
 ## Step 0: Timestamp + Calculate Paths
 
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ROOT="$(pwd)"
 TODAY=$(date +%Y-%m-%d)
 TIME=$(date +%H%M)
@@ -64,7 +64,7 @@ OWNER=$(echo "$URL" | sed -E 's|.*github.com/([^/]+)/.*|\1|')
 REPO=$(echo "$URL" | sed -E 's|.*/([^/]+)(\.git)?$|\1|')
 TARGET_REPO="$GHQ_ROOT/github.com/$OWNER/$REPO"
 TARGET_NAME="$OWNER/$REPO"
-echo "✓ Cloned to ghq: $TARGET_REPO"
+echo " Cloned to ghq: $TARGET_REPO"
 ```
 
 **Note**: `/trace` only clones to ghq. Use `/learn` to create docs in psi/learn/.

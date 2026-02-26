@@ -27,32 +27,32 @@ async function main() {
   await new Promise(r => client.on('connect', r));
   client.subscribe(TOPIC_RES);
 
-  console.log('\n🚀 FULL SMOOTH FLOW\n');
+  console.log('\n FULL SMOOTH FLOW\n');
 
   // 1. Create tab
-  console.log('1️⃣  Creating new Gemini tab...');
+  console.log('1  Creating new Gemini tab...');
   const tab = await send('create_tab');
-  console.log(`   ✅ Tab ID: ${tab.tabId}`);
+  console.log(`    Tab ID: ${tab.tabId}`);
 
   // 2. Wait
-  console.log('2️⃣  Waiting 4s for load...');
+  console.log('2  Waiting 4s for load...');
   await new Promise(r => setTimeout(r, 4000));
 
   // 3. Badge
-  console.log('3️⃣  Injecting badge...');
+  console.log('3  Injecting badge...');
   await send('inject_badge', { tabId: tab.tabId, text: 'SMOOTH!' });
-  console.log('   ✅ Badge injected');
+  console.log('    Badge injected');
 
   // 4. Chat
-  console.log('4️⃣  Sending chat...');
+  console.log('4  Sending chat...');
   const chatResult = await send('chat', {
     tabId: tab.tabId,
     text: 'Say "TAB PRECISION SMOOTH!" if you received this message.'
   });
-  console.log('   ✅ Chat sent (response may timeout, check tab)');
+  console.log('    Chat sent (response may timeout, check tab)');
 
   // 5. Done
-  console.log('\n🎉 COMPLETE!');
+  console.log('\n COMPLETE!');
   console.log(`   Tab ID: ${tab.tabId}`);
   console.log('   Check the new tab for Gemini response!\n');
 

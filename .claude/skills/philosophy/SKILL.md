@@ -18,7 +18,7 @@ description: v1.6.0 G-SKLL | Display Oracle philosophy principles and guidance. 
 
 ## Step 0: Timestamp
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---
@@ -185,11 +185,11 @@ When running `/philosophy check`:
 
 | Principle | Status | Note |
 |-----------|--------|------|
-| Nothing is Deleted | ✓/⚠/✗ | ... |
-| Patterns Over Intentions | ✓/⚠/✗ | ... |
-| External Brain | ✓/⚠/✗ | ... |
-| Curiosity Creates | ✓/⚠/✗ | ... |
-| Form and Formless | ✓/⚠/✗ | ... |
+| Nothing is Deleted | // | ... |
+| Patterns Over Intentions | // | ... |
+| External Brain | // | ... |
+| Curiosity Creates | // | ... |
+| Form and Formless | // | ... |
 ```
 
 ---

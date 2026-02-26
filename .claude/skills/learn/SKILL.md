@@ -71,14 +71,14 @@ while read repo; do
   REPO=$(basename "$repo")
   mkdir "$ROOT/psi/learn/$OWNER/$REPO"
   git clone "$(ghq root)/github.com/$repo" "$ROOT/psi/learn/$OWNER/$REPO/origin"
-  echo "✓ Restored: $repo"
+  echo " Restored: $repo"
 done < "$ROOT/psi/learn/.origins"
 ```
 
 ## Step 0: Detect Input Type + Resolve Path
 
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 **CRITICAL: Capture ABSOLUTE paths first (before spawning any agents):**
@@ -92,7 +92,7 @@ When spawning Haiku agents, you MUST give them TWO literal paths:
 1. **SOURCE_DIR** (where to READ code) - the `origin/` symlink
 2. **DOCS_DIR** (where to WRITE docs) - the parent directory, NOT inside origin/
 
-⚠️ **THE BUG**: If you only give agents `origin/` path, they cd into it and write there → files end up in WRONG repo!
+ **THE BUG**: If you only give agents `origin/` path, they cd into it and write there → files end up in WRONG repo!
 
 **FIX**: Always give BOTH paths as LITERAL absolute values (no variables!):
 
@@ -119,7 +119,7 @@ ghq get -u "$URL" && \
   git clone "$GHQ_ROOT/github.com/$OWNER/$REPO" "$ROOT/psi/learn/$OWNER/$REPO/origin" && \
   echo "$OWNER/$REPO" >> "$ROOT/psi/learn/.origins" && \
   sort -u -o "$ROOT/psi/learn/.origins" "$ROOT/psi/learn/.origins" && \
-  echo "✓ Ready: $ROOT/psi/learn/$OWNER/$REPO/origin → source"
+  echo " Ready: $ROOT/psi/learn/$OWNER/$REPO/origin → source"
 ```
 
 **Verify:**
@@ -165,7 +165,7 @@ Example:
 - Files: 1349_ARCHITECTURE.md, 1349_CODE-SNIPPETS.md, etc.
 ```
 
-**⚠️ CRITICAL: Create symlink AND date folder FIRST, then spawn agents!**
+** CRITICAL: Create symlink AND date folder FIRST, then spawn agents!**
 
 1. Run the clone + symlink script in Step 0 FIRST
 2. Capture TIME: `date +%H%M` (e.g., 1349)
@@ -188,7 +188,7 @@ You are exploring a codebase.
 READ source code from: [SOURCE_DIR]
 WRITE your output to:   [DOCS_DIR]/[TIME]_OVERVIEW.md
 
-⚠️ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
+ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
 
 Analyze:
 - What is this project? (1 sentence)
@@ -208,7 +208,7 @@ Launch 3 agents in parallel. Each prompt must include (use LITERAL paths!):
 READ source code from: [SOURCE_DIR]
 WRITE your output to:   [DOCS_DIR]/[TIME]_[filename].md
 
-⚠️ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
+ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
 ```
 
 ### Agent 1: Architecture Explorer → `[TIME]_ARCHITECTURE.md`
@@ -239,7 +239,7 @@ Launch 5 agents in parallel. Each prompt must include (use LITERAL paths!):
 READ source code from: [SOURCE_DIR]
 WRITE your output to:   [DOCS_DIR]/[TIME]_[filename].md
 
-⚠️ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
+ IMPORTANT: Write to DOCS_DIR (the date folder), NOT inside origin/!
 ```
 
 ### Agent 1: Architecture Explorer → `[TIME]_ARCHITECTURE.md`
@@ -302,7 +302,7 @@ WRITE your output to:   [DOCS_DIR]/[TIME]_[filename].md
 
 ### --fast mode
 ```markdown
-## 📚 Quick Learn: [REPO]
+## Quick Learn: [REPO]
 
 **Mode**: fast (1 agent)
 **Location**: psi/learn/$OWNER/$REPO/[TODAY]/[TIME]_*.md
@@ -315,7 +315,7 @@ WRITE your output to:   [DOCS_DIR]/[TIME]_[filename].md
 
 ### Default mode
 ```markdown
-## 📚 Learning Complete: [REPO]
+## Learning Complete: [REPO]
 
 **Mode**: default (3 agents)
 **Location**: psi/learn/$OWNER/$REPO/[TODAY]/[TIME]_*.md
@@ -332,7 +332,7 @@ WRITE your output to:   [DOCS_DIR]/[TIME]_[filename].md
 
 ### --deep mode
 ```markdown
-## 📚 Deep Learning Complete: [REPO]
+## Deep Learning Complete: [REPO]
 
 **Mode**: deep (5 agents)
 **Location**: psi/learn/$OWNER/$REPO/[TODAY]/[TIME]_*.md

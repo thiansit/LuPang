@@ -62,9 +62,9 @@ Print a summary table at the end:
 Platform: macOS / Linux (Ubuntu) / Windows
 Tool    Status
 ----    ------
-git     ✓ installed (2.x.x)
-gh      ✓ installed + authenticated
-ghq     ✓ installed (root: ~/Code)
+git      installed (2.x.x)
+gh       installed + authenticated
+ghq      installed (root: ~/Code)
 ```
 
 If everything is already set up, just print the summary — no changes needed.

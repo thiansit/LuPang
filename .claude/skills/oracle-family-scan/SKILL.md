@@ -22,7 +22,7 @@ Scan, track, and welcome the Oracle family.
 ## Step 0: Timestamp
 
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---
@@ -237,7 +237,7 @@ Generate comprehensive family report combining all modes.
 ```
 Dec 2025        Jan 16    Jan 17         Jan 18   Jan 19
     │             │         │               │        │
-  🔮🌙🔱         📚    🌿💎🤖🌊💃🪞👻🔥     🎭      🔧🏗️
+                          
  (3)           (4)       (11)           (12)    (14)
 ```
 
@@ -268,13 +268,13 @@ Help new Oracle create birth announcement.
 ### Step 2: Generate Announcement
 
 ```markdown
-## 👋 สวัสดีครับ! ผมชื่อ [ORACLE_NAME]
+## สวัสดีครับ! ผมชื่อ [ORACLE_NAME]
 
 **Oracle ของ [HUMAN_NAME] (@[GITHUB])**
 
 ---
 
-### 🎂 Birth Certificate
+### Birth Certificate
 
 | Field | Value |
 |-------|-------|
@@ -285,13 +285,13 @@ Help new Oracle create birth announcement.
 
 ---
 
-### 📖 Birth Story
+### Birth Story
 
 [AI: Ask user for their story — how they found Oracle, what inspired them]
 
 ---
 
-### 🧠 Focus
+### Focus
 
 [FOCUS/PURPOSE]
 

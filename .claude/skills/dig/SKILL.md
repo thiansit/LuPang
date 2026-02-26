@@ -22,7 +22,7 @@ Mine Claude Code session data for timelines, gaps, and repo attribution. No quer
 ## Step 0: Timestamp
 
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---

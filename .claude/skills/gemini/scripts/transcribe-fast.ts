@@ -30,27 +30,27 @@ async function main() {
   await new Promise(r => client.on('connect', r));
   client.subscribe(TOPIC_RES);
 
-  console.log('\n⚡ FAST TRANSCRIBE FLOW\n');
+  console.log('\n FAST TRANSCRIBE FLOW\n');
 
   // 1. Create tab
-  console.log('1️⃣  Creating new Gemini tab...');
+  console.log('1  Creating new Gemini tab...');
   const tab = await send('create_tab');
-  console.log(`   ✅ Tab ID: ${tab.tabId}`);
+  console.log(`    Tab ID: ${tab.tabId}`);
 
   // 2. Wait for load
-  console.log('2️⃣  Waiting 4s for load...');
+  console.log('2  Waiting 4s for load...');
   await new Promise(r => setTimeout(r, 4000));
 
   // 3. Select model
-  console.log(`3️⃣  Selecting model: ${model}...`);
+  console.log(`3  Selecting model: ${model}...`);
   const modelResult = await send('select_model', { tabId: tab.tabId, model });
-  console.log(`   ${modelResult.timeout ? '⏱️ Timeout (may still work)' : '✅ Model selected'}`);
+  console.log(`   ${modelResult.timeout ? ' Timeout (may still work)' : ' Model selected'}`);
 
   // 4. Wait for model switch
   await new Promise(r => setTimeout(r, 1000));
 
   // 5. Send transcribe
-  console.log('4️⃣  Sending transcribe request...');
+  console.log('4  Sending transcribe request...');
   const prompt = `Transcribe this YouTube video. Give me:
 1. Summary (2-3 sentences)
 2. Key points (bullet list)
@@ -59,9 +59,9 @@ async function main() {
 Video: ${youtubeUrl}`;
 
   await send('chat', { tabId: tab.tabId, text: prompt });
-  console.log('   ✅ Sent!');
+  console.log('    Sent!');
 
-  console.log('\n🎉 DONE!');
+  console.log('\n DONE!');
   console.log(`   Model: ${model}`);
   console.log(`   Tab: ${tab.tabId}`);
   console.log(`   Video: ${youtubeUrl}\n`);

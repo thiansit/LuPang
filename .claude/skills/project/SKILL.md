@@ -38,7 +38,7 @@ mkdir psi/learn/owner
 git clone "$GHQ_ROOT/github.com/owner/repo" psi/learn/owner/repo
 ```
 
-**Output**: "✓ Linked [repo] to psi/learn/owner/repo"
+**Output**: " Linked [repo] to psi/learn/owner/repo"
 
 ### incubate [url|slug] [--offload|--contribute|--flash]
 
@@ -52,7 +52,7 @@ mkdir psi/incubate/owner
 git clone "$GHQ_ROOT/github.com/owner/repo" psi/incubate/owner/repo
 ```
 
-**Output**: "✓ Linked [repo] to psi/incubate/owner/repo"
+**Output**: " Linked [repo] to psi/incubate/owner/repo"
 
 #### Workflow Flags
 
@@ -111,7 +111,7 @@ Complete contribution cycle with full cleanup:
     ↓
 7. Auto-offload + purge ghq clone
     ↓
-"✓ Issue #N → PR #M → Offloaded & Purged"
+" Issue #N → PR #M → Offloaded & Purged"
 ```
 
 **Use case**: Quick external contributions without leaving traces.
@@ -135,19 +135,19 @@ find psi/learn psi/incubate -type l | grep -i "query"
 Show all tracked projects:
 
 ```bash
-echo "📚 Learn"
+echo " Learn"
 find psi/learn -type l | while read link; do
   target=$(readlink "$link")
   echo "  ${link#psi/learn/} → $target"
 done
 
-echo "🌱 Incubate"
+echo " Incubate"
 find psi/incubate -type l | while read link; do
   target=$(readlink "$link")
   echo "  ${link#psi/incubate/} → $target"
 done
 
-echo "🏠 External (ghq)"
+echo " External (ghq)"
 ghq list | grep -v "laris-co/Nat-s-Agents" | head -10
 ```
 
@@ -201,12 +201,12 @@ User: "Quick README fix on oracle-skills-cli"
 → [edit, commit, push]
 → PR #18 created (Closes #17)
 → Auto-offload + purge
-→ "✓ Issue #17 → PR #18 → Offloaded & Purged"
+→ " Issue #17 → PR #18 → Offloaded & Purged"
 ```
 
 ## Anti-Patterns
 
-| ❌ Wrong | ✅ Right |
+|  Wrong |  Right |
 |----------|----------|
 | `git clone` directly to psi/ | `ghq get` then symlink |
 | Flat: `psi/learn/repo-name` | Org structure: `psi/learn/owner/repo` |

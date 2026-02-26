@@ -58,19 +58,19 @@ fi
 Parse and display:
 
 ```
-📍 Physical Status
+ Physical Status
 ═══════════════════
 
-🏠 Currently At: [place column, or locality if empty]
+ Currently At: [place column, or locality if empty]
 
 | Device | Battery | Precision | Updated |
 |--------|---------|-----------|---------|
 [one row per device, sorted by accuracy]
 
-📍 [address from iPhone row]
-🗺️ Map: https://maps.google.com/?q=[lat],[lon]
+ [address from iPhone row]
+ Map: https://maps.google.com/?q=[lat],[lon]
 
-⏱️ At this location: [X hours] (from TIME_AT_LOCATION section)
+ At this location: [X hours] (from TIME_AT_LOCATION section)
 ```
 
 ## Known Places (with coordinates)
@@ -90,7 +90,7 @@ Parse and display:
 If user asks "how far to X":
 
 ```
-🛫 To [destination]:
+ To [destination]:
 - Distance: [calculate km]
-- 🗺️ Directions: https://maps.google.com/maps?saddr=[lat],[lon]&daddr=[dest_lat],[dest_lon]
+-  Directions: https://maps.google.com/maps?saddr=[lat],[lon]&daddr=[dest_lat],[dest_lon]
 ```

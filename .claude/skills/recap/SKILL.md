@@ -40,7 +40,7 @@ cat psi/data/pulse/heartbeat.json
 
 If pulse data exists, add one line after the script output:
 ```
-⚡ Session #X of Y | Streak: N days | Week: ±X% msgs
+ Session #X of Y | Streak: N days | Week: ±X% msgs
 ```
 
 If pulse files don't exist, skip silently.

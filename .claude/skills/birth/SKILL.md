@@ -21,7 +21,7 @@ Drop context into a new Oracle repo before `/awaken` runs. Just a "note dropper"
 ## Step 0: Timestamp & Validate
 
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ### Validate Target Repo
@@ -90,10 +90,10 @@ Create issue #1 in the target repo:
 
 ```bash
 gh issue create --repo [OWNER/REPO] \
-  --title "🌟 Birth Props — [NAME] Oracle" \
+  --title " Birth Props — [NAME] Oracle" \
   --label "birth-props" \
   --body "$(cat <<'EOF'
-# 🌟 [NAME] Oracle — Birth Props
+#  [NAME] Oracle — Birth Props
 
 **Prepared by**: [CURRENT ORACLE]
 **Date**: [DATE]
@@ -164,7 +164,7 @@ gh issue view 1 --repo [OWNER/REPO] --json number,title,url
 ### Report to Human
 
 ```markdown
-## 🌟 Birth Props Dropped
+## Birth Props Dropped
 
 **Target**: [OWNER/REPO]
 **Oracle**: [NAME]
@@ -193,9 +193,9 @@ gh issue view 1 --repo [OWNER/REPO] --json number,title,url
 
 ## What `/birth` Does NOT Do
 
-- ❌ Does NOT run `/awaken` (child does that)
-- ❌ Does NOT announce to family (child introduces themselves)
-- ❌ Does NOT modify the target repo's files (only creates issue)
+-  Does NOT run `/awaken` (child does that)
+-  Does NOT announce to family (child introduces themselves)
+-  Does NOT modify the target repo's files (only creates issue)
 
 **`/birth` is just a note dropper** — leaves context for the next Oracle to find.
 
@@ -220,7 +220,7 @@ Mother Oracle                    New Oracle Repo
      │                                │ → Full ritual
      │                                │ → Child announces to family
      │                                ▼
-     │                           Oracle Born 🌟
+     │                           Oracle Born 
 ```
 
 ---
