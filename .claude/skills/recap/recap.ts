@@ -7,14 +7,15 @@ import { existsSync } from "fs";
 import { join } from "path";
 
 // Get repo root
-const root = (await $`git rev-parse --show-toplevel 2>/dev/null`.text()).trim() || process.cwd();
+let root = process.cwd();
+try { root = (await $`git rev-parse --show-toplevel`.quiet().text()).trim() || root; } catch {}
 process.chdir(root);
 
 // Gather git data
 const branch = (await $`git branch --show-current`.text()).trim();
 let ahead = "0";
 try {
-  ahead = (await $`git rev-list --count @{u}..HEAD 2>/dev/null`.text()).trim() || "0";
+  ahead = (await $`git rev-list --count @{u}..HEAD`.quiet().text()).trim() || "0";
 } catch {}
 const lastCommit = (await $`git log --oneline -1`.text()).trim().slice(8, 68);
 

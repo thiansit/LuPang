@@ -107,13 +107,15 @@ function main() {
     process.exit(1);
   }
 
-  // Check if dot is available
+  // Check if dot is available (cross-platform)
   try {
-    execSync('which dot', { encoding: 'utf-8' });
+    const cmd = process.platform === 'win32' ? 'where dot' : 'which dot';
+    execSync(cmd, { encoding: 'utf-8', stdio: 'pipe' });
   } catch {
     console.error('Error: graphviz (dot) not found. Install with:');
-    console.error('  brew install graphviz    # macOS');
-    console.error('  apt install graphviz     # Linux');
+    console.error('  brew install graphviz       # macOS');
+    console.error('  apt install graphviz        # Linux');
+    console.error('  winget install graphviz     # Windows');
     process.exit(1);
   }
 

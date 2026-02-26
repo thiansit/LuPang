@@ -38,10 +38,9 @@ if (!exists) await $`gh repo create ${target} --private`;
 // 2. Clone to ghq
 await $`ghq get github.com/${target}`.quiet();
 
-// 3. Copy files
+// 3. Copy files (cross-platform using Node.js)
 if (existsSync(sourcePath)) {
-  await $`cp -r ${sourcePath}/* ${targetPath}/`.quiet().catch(() => {});
-  await $`cp -r ${sourcePath}/.[!.]* ${targetPath}/`.quiet().catch(() => {});
+  cpSync(sourcePath, targetPath, { recursive: true, force: true });
 }
 
 // 4. Commit and push

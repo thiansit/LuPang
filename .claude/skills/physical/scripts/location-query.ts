@@ -3,8 +3,10 @@ import { $ } from 'bun';
 const MODE = process.argv[2] || 'all';
 
 async function fetchCsv(filename: string): Promise<string> {
-  const response = await $`gh api repos/thiansit/location-data/contents/${filename} --jq '.content' | base64 -d`.text();
-  return response;
+  // Cross-platform: use gh api JSON output + Node.js Buffer instead of pipe to base64
+  const jsonResponse = await $`gh api repos/thiansit/location-data/contents/${filename} --jq '.content'`.text();
+  const decoded = Buffer.from(jsonResponse.trim(), 'base64').toString('utf8');
+  return decoded;
 }
 
 if (MODE === 'current' || MODE === 'all') {
@@ -15,7 +17,7 @@ if (MODE === 'current' || MODE === 'all') {
 if (MODE === 'time' || MODE === 'all') {
   console.log('---TIME_AT_LOCATION---');
   const history = await fetchCsv('history.csv');
-  
+
   // Simple CSV parser that respects quotes
   const parseCSVLine = (line: string) => {
     const res = [];
@@ -43,18 +45,18 @@ if (MODE === 'time' || MODE === 'all') {
     if (cols.length < 13) return null; // Skip malformed
     return {
       device: cols[0],
-      updated: new Date(cols[12]) 
+      updated: new Date(cols[12])
     };
   }).filter(r => r && r.device && (r.device.includes('iPhone') || r.device.includes('iPad')));
 
   if (records.length > 0) {
     // Sort by time
     records.sort((a, b) => a.updated.getTime() - b.updated.getTime());
-    
+
     const firstSeen = records[0].updated;
     const lastSeen = records[records.length - 1].updated;
     const hoursHere = ((lastSeen.getTime() - firstSeen.getTime()) / (1000 * 60 * 60)).toFixed(1);
-    
+
     console.log(`first_seen = ${firstSeen.toISOString().replace('T', ' ').slice(0, 19)}`);
     console.log(`last_seen = ${lastSeen.toISOString().replace('T', ' ').slice(0, 19)}`);
     console.log(`records = ${records.length}`);

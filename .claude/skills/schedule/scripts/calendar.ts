@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 // calendar.ts - Show month calendar with annotations
-import { $ } from "bun";
+// Cross-platform: generates calendar in Node.js instead of Unix `cal`
 import { existsSync } from "fs";
 
 const ROOT = process.env.ROOT;
@@ -20,17 +20,13 @@ if (existsSync(scheduleFile)) {
   const content = await Bun.file(scheduleFile).text();
   for (const line of content.split("\n")) {
     if (!line.includes(monthName)) continue;
-    
+
     const dayMatch = line.match(new RegExp(`${monthName}\\s+(\\d+)`));
     if (!dayMatch) continue;
     const day = parseInt(dayMatch[1]);
-    
+
     if (line.includes("free")) days[day] = { type: "free" };
     else if (line.includes("Done")) days[day] = { type: "done" };
-    else if (line.includes("")) {
-      const dest = line.match(/→([A-Z]+)/)?.[1];
-      days[day] = { type: "flight", event: dest };
-    }
     else if (/talk/i.test(line)) days[day] = { type: "talk" };
     else if (/block|mountain/i.test(line)) days[day] = { type: "blockmtn" };
     else if (/bitkub/i.test(line)) days[day] = { type: "bitkub" };
@@ -39,23 +35,44 @@ if (existsSync(scheduleFile)) {
   }
 }
 
-// Get calendar
-const cal = await $`cal ${monthNum} ${year}`.text();
+// Generate calendar in pure JS (cross-platform, no `cal` dependency)
+function generateCalendar(y: number, m: number): string {
+  const header = now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const dayNames = "Su Mo Tu We Th Fr Sa";
+
+  const firstDay = new Date(y, m - 1, 1).getDay();
+  const daysInMonth = new Date(y, m, 0).getDate();
+
+  let lines = [header.padStart(Math.floor((20 + header.length) / 2)), dayNames];
+  let line = "   ".repeat(firstDay);
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    line += String(d).padStart(2) + " ";
+    if ((firstDay + d) % 7 === 0 || d === daysInMonth) {
+      lines.push(line.trimEnd());
+      line = "";
+    }
+  }
+
+  return lines.join("\n");
+}
+
+const cal = generateCalendar(year, monthNum);
 
 for (const line of cal.split("\n")) {
   if (!/\d/.test(line)) {
     console.log(line);
     continue;
   }
-  
+
   let marked = line;
   const annotations: string[] = [];
-  
+
   const dayNums = line.match(/\d+/g)?.map(Number) || [];
-  
+
   for (const day of dayNums) {
     const info = days[day];
-    
+
     if (day === todayNum) {
       marked = marked.replace(new RegExp(`(^|\\s)${day}(\\s|$)`), `$1[${day}]$2`);
     } else if (info?.type === "free") {
@@ -63,7 +80,7 @@ for (const line of cal.split("\n")) {
     } else if (info && info.type !== "done") {
       marked = marked.replace(new RegExp(`\\s${day}(\\s|$)`), `·${day}$1`);
     }
-    
+
     if (info) {
       switch (info.type) {
         case "flight": annotations.push(`${day}${info.event || ""}`); break;
@@ -74,10 +91,10 @@ for (const line of cal.split("\n")) {
       }
     }
   }
-  
-  const suffix = dayNums.includes(todayNum) ? "  <--" : 
-                 annotations.length ? "   " : 
+
+  const suffix = dayNums.includes(todayNum) ? "  <--" :
+                 annotations.length ? "   " :
                  /[·°]/.test(marked) ? "" : "    free";
-  
+
   console.log(marked + suffix + annotations.join(" "));
 }

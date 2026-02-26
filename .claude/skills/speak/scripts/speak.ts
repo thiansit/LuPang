@@ -92,7 +92,8 @@ function parseArgs(): Options {
 
 async function checkEdgeTts(): Promise<boolean> {
   try {
-    const proc = Bun.spawn(["which", "edge-tts"], { stdout: "pipe" });
+    const cmd = process.platform === "win32" ? "where" : "which";
+    const proc = Bun.spawn([cmd, "edge-tts"], { stdout: "pipe", stderr: "pipe" });
     await proc.exited;
     return proc.exitCode === 0;
   } catch {
@@ -126,15 +127,19 @@ async function listVoices(): Promise<void> {
     console.log("\n  edge-tts not installed. Install with: pip install edge-tts\n");
   }
 
-  console.log("\n macOS voices:\n");
-  const macProc = Bun.spawn(["say", "-v", "?"], { stdout: "pipe" });
-  const macOutput = await new Response(macProc.stdout).text();
-  const macFiltered = macOutput
-    .split("\n")
-    .filter((l) => l.includes("en_") || l.includes("th_"))
-    .slice(0, 15);
-  console.log(macFiltered.join("\n"));
-  console.log("... (run 'say -v ?' for full list)");
+  if (process.platform === "darwin") {
+    console.log("\n macOS voices:\n");
+    const macProc = Bun.spawn(["say", "-v", "?"], { stdout: "pipe" });
+    const macOutput = await new Response(macProc.stdout).text();
+    const macFiltered = macOutput
+      .split("\n")
+      .filter((l) => l.includes("en_") || l.includes("th_"))
+      .slice(0, 15);
+    console.log(macFiltered.join("\n"));
+    console.log("... (run 'say -v ?' for full list)");
+  } else {
+    console.log("\n macOS voices: (only available on macOS)\n");
+  }
 
   console.log("\n" + "═".repeat(60));
 }
@@ -165,8 +170,16 @@ async function speakWithEdgeTts(
       return false;
     }
 
-    // Play the audio
-    const playProc = Bun.spawn(["afplay", tmpFile]);
+    // Play the audio (cross-platform)
+    let playCmd: string[];
+    if (process.platform === "win32") {
+      playCmd = ["powershell", "-c", `(New-Object Media.SoundPlayer '${tmpFile}').PlaySync()`];
+    } else if (process.platform === "darwin") {
+      playCmd = ["afplay", tmpFile];
+    } else {
+      playCmd = ["aplay", tmpFile];
+    }
+    const playProc = Bun.spawn(playCmd, { stderr: "pipe" });
     await playProc.exited;
 
     // Cleanup
@@ -186,6 +199,10 @@ async function speakWithMac(
   voice: string,
   rate?: string
 ): Promise<boolean> {
+  if (process.platform !== "darwin") {
+    console.log("macOS 'say' not available on this platform. Use edge-tts instead.");
+    return false;
+  }
   try {
     const args = ["say", "-v", voice];
 

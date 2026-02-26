@@ -55,7 +55,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-start.sh 2>/dev/null || true"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.js\""
           }
         ]
       }
@@ -65,7 +65,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-end.sh 2>/dev/null || true"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-end.js\""
           }
         ]
       }
@@ -76,11 +76,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/safety-check.sh 2>/dev/null || true"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/safety-check.js\""
           },
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/git-workflow-validator.sh 2>/dev/null || true"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/git-workflow-validator.js\""
           }
         ]
       }
