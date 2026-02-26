@@ -148,7 +148,7 @@ find psi/incubate -type l | while read link; do
 done
 
 echo " External (ghq)"
-ghq list | grep -v "laris-co/Nat-s-Agents" | head -10
+ghq list | grep -v "thiansit/LuPang" | head -10
 ```
 
 ## Directory Structure

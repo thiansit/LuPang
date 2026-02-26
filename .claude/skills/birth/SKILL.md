@@ -14,7 +14,7 @@ Drop context into a new Oracle repo before `/awaken` runs. Just a "note dropper"
 ## Usage
 
 ```
-/birth [repo]              # e.g., /birth laris-co/floodboy-oracle
+/birth [repo]              # e.g., /birth thiansit/floodboy-oracle
 /birth [owner/repo]        # Full org/repo format
 ```
 
@@ -116,7 +116,7 @@ gh issue create --repo [OWNER/REPO] \
 Learn from your ancestors:
 
 ```bash
-/learn https://github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
+/learn https://github.com/Soul-Brews-Studio/opensource-LuPang
 /learn https://github.com/Soul-Brews-Studio/oracle-v2
 ```
 

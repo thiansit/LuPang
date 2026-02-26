@@ -16,7 +16,7 @@ Supports both formats:
 ```yaml
 # psi/memory/slugs.yaml
 thedotmack/claude-mem: ~/Code/github.com/thedotmack/claude-mem
-laris-co/oracle-v2: ~/Code/github.com/laris-co/oracle-v2
+thiansit/oracle-v2: ~/Code/github.com/thiansit/oracle-v2
 ```
 
 ## Commands
@@ -71,7 +71,7 @@ laris-co/oracle-v2: ~/Code/github.com/laris-co/oracle-v2
 
 ### Incubate (work, auto-create)
 ```bash
-.claude/skills/project-manager/scripts/incubate.sh <name> [--org laris-co]
+.claude/skills/project-manager/scripts/incubate.sh <name> [--org thiansit]
 ```
 
 ### Spinoff (graduate)
@@ -89,7 +89,7 @@ laris-co/oracle-v2: ~/Code/github.com/laris-co/oracle-v2
 
 ### Offload (remove symlinks)
 ```bash
-.claude/skills/project-manager/scripts/offload.sh laris-co/oracle-v2
+.claude/skills/project-manager/scripts/offload.sh thiansit/oracle-v2
 .claude/skills/project-manager/scripts/offload.sh oracle-v2  # short slug
 .claude/skills/project-manager/scripts/offload.sh all        # clean slate
 ```

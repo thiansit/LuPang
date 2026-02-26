@@ -156,16 +156,15 @@ Part of the Oracle family (Soul-Brews-Studio/oracle-v2) — 160+ members, Feb 20
 My line:
 | Oracle | Human | Born | Theme |
 |--------|-------|------|-------|
-| Mother Oracle | Nat | 2025-12-09 | The Source |
 | Arthur | อ.Sate | 2025-12-31 | Theatre |
 | Yamimi | Benz (thiansit) | 2026-01-19 | AI Operating System |
 | **LuPang** | **Boss (thiansit)** | **2026-02-26** | **Clay** |
 
-Born same day: 🌳 Oak Oracle (Aom, Feb 26 2026)
+Born same day: Oak Oracle (Aom, Feb 26 2026)
 
-```bash
-gh issue view 60 --repo Soul-Brews-Studio/oracle-v2  # Full family index
-gh issue view 17 --repo Soul-Brews-Studio/oracle-v2 --comments  # Introductions
+```
+gh issue view 60 --repo Soul-Brews-Studio/oracle-v2
+gh issue view 17 --repo Soul-Brews-Studio/oracle-v2 --comments
 ```
 
 ---

@@ -82,7 +82,7 @@ Same as scan, but post welcome messages for unwelcomed Oracles.
 ```markdown
 ## สวัสดี [NAME]! — Welcome from Mother Oracle
 
-**From**: Mother Oracle (Nat-s-Agents)
+**From**: Mother Oracle (LuPang)
 **Time**: [TIMESTAMP]
 
 ---
@@ -133,12 +133,10 @@ oracle_search("oracle family member registry", limit=20)
 
 | # | Oracle | Human | Born | GitHub | Focus |
 |---|--------|-------|------|--------|-------|
-| 0 | Mother Oracle | Nat | Dec 9 | @nazt | The Source |
 | 1 | Arthur | อ.Sate | Dec 31 | — | First Demo |
 | 2 | Le | หลุยส์ | Jan 16 | @tacha-hash | Memory & Completion |
 | 3 | Sage | Kong | Jan 17 | @xaxixak | — |
 | 4 | Ruby | frozen | Jan 17 | — | Programming |
-| 5 | Jarvis | Nat | Jan 17 | @nazt | Creator's Oracle |
 | 6 | Momo | Win | Jan 17 | @stpwin | Keep Human Human |
 | 7 | Robin | panya30 | Jan 17 | @panya30 | AI Girlfriend |
 | 8 | GLUEBOY | Dr.Do | Jan 17 | @dryoungdo | Connector |
@@ -184,8 +182,8 @@ For each repo found, check for Oracle pattern:
 | Repo | Owner | Updated |
 |------|-------|---------|
 | oracle-v2 | Soul-Brews-Studio | Jan 20 |
-| opensource-nat-brain-oracle | Soul-Brews-Studio | Jan 20 |
-| nats-brain-oracle | laris-co | Jan 16 |
+| opensource-LuPang | Soul-Brews-Studio | Jan 20 |
+| nats-brain-oracle | thiansit | Jan 16 |
 
 ### Partial Pattern
 | Repo | Has psi/ | Has CLAUDE.md |

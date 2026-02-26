@@ -15,7 +15,7 @@ if (!input) {
 const ROOT = getRoot();
 const { slugsFile, incubateDir } = getPaths(ROOT);
 const orgFlag = args.indexOf("--org");
-const defaultOrg = orgFlag !== -1 ? args[orgFlag + 1] : "laris-co";
+const defaultOrg = orgFlag !== -1 ? args[orgFlag + 1] : "thiansit";
 
 const { owner, name, slug } = parseRepo(input, defaultOrg);
 const localPath = ghqPath(owner, name);

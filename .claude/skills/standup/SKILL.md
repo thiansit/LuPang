@@ -29,7 +29,7 @@ Gather info from multiple sources:
 
 ### 0. Physical Location (auto)
 ```bash
-gh api repos/laris-co/nat-location-data/contents/current.csv --jq '.content' | base64 -d | grep iPhone | head -1 | cut -d',' -f9
+gh api repos/thiansit/LuPang/contents/current.csv --jq '.content' | base64 -d | grep iPhone | head -1 | cut -d',' -f9
 ```
 Show: " Currently at: [place]"
 
