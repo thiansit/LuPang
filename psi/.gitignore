@@ -1,0 +1,8 @@
+# Ephemeral pillars — not tracked
+active/
+memory/logs/
+learn/
+incubate/
+
+# State files
+.awaken-state.json
