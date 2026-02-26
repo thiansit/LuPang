@@ -49,5 +49,22 @@ cpSync(localPath, linkPath, { recursive: true });
 // Register slug
 await updateSlugsFile(slugsFile, slug, localPath);
 
+// Auto-distribute hooks and settings to the new repo
+const hooksDir = join(ROOT, ".claude", "hooks");
+const settingsSrc = join(ROOT, ".claude", "settings.json");
+const targetHooksDir = join(linkPath, ".claude", "hooks");
+mkdirSync(targetHooksDir, { recursive: true });
+
+const hookFiles = ["safety-check.js", "git-workflow-validator.js", "session-start.js", "session-end.js"];
+for (const hf of hookFiles) {
+  const src = join(hooksDir, hf);
+  if (existsSync(src)) cpSync(src, join(targetHooksDir, hf));
+}
+const targetSettings = join(linkPath, ".claude", "settings.json");
+if (!existsSync(targetSettings) && existsSync(settingsSrc)) {
+  cpSync(settingsSrc, targetSettings);
+}
+console.log("  Hooks distributed");
+
 console.log(`Ready: ${localPath}`);
 console.log(`GitHub: https://github.com/${slug}`);
