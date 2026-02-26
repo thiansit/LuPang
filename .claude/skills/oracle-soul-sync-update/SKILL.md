@@ -20,7 +20,7 @@ All-in-one skill: `/soul-sync` + `/calibrate` + `/update` combined.
 
 ## Step 0: Timestamp
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---
@@ -52,9 +52,9 @@ echo "Latest available: $LATEST"
 
 ```bash
 if [ "$CURRENT" = "$LATEST" ]; then
-  echo "✅ Soul synced! ($CURRENT)"
+  echo " Soul synced! ($CURRENT)"
 else
-  echo "⚠️ Sync needed: $CURRENT → $LATEST"
+  echo " Sync needed: $CURRENT → $LATEST"
 fi
 ```
 

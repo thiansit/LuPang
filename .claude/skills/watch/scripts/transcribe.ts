@@ -92,11 +92,11 @@ Structure the document with:
 - Action items if applicable`
 }
 
-console.log(`🎬 Mode: ${mode.toUpperCase()}`)
-if (model) console.log(`🧠 Model: ${model}`)
+console.log(` Mode: ${mode.toUpperCase()}`)
+if (model) console.log(` Model: ${model}`)
 
 // Step 1: Get metadata
-console.log("\n📹 Getting metadata...")
+console.log("\n Getting metadata...")
 const metadataScript = new URL("./get-metadata.ts", import.meta.url).pathname
 const metadataResult = await $`bun ${metadataScript} ${url}`.text()
 
@@ -113,7 +113,7 @@ console.log(`   Channel: ${metadata.channel}`)
 console.log(`   Duration: ${metadata.duration_string}`)
 
 // Step 2: Create new Gemini tab with mode-specific URL
-console.log(`\n🌐 Opening Gemini (${mode} mode)...`)
+console.log(`\n Opening Gemini (${mode} mode)...`)
 const ts = Date.now()
 const createTabCmd = JSON.stringify({
   id: `newtab-${ts}`,
@@ -139,14 +139,14 @@ try {
   if (responseText.trim()) {
     const response = JSON.parse(responseText.trim())
     tabId = response?.tabId || response?.result?.tabId
-    if (tabId) console.log(`   ✓ Tab created: ${tabId}`)
+    if (tabId) console.log(`    Tab created: ${tabId}`)
   }
 } catch (e) {
-  console.log("   ⚠️ Could not parse response")
+  console.log("    Could not parse response")
 }
 
 if (!tabId) {
-  console.log("   ⚠️ No tabId received, continuing...")
+  console.log("    No tabId received, continuing...")
 }
 
 // Wait for page load (research mode needs more time)
@@ -156,7 +156,7 @@ await Bun.sleep(waitTime)
 
 // Step 2.5: Select model if specified
 if (model && tabId) {
-  console.log(`\n🧠 Selecting ${model} model...`)
+  console.log(`\n Selecting ${model} model...`)
   const modelCmd = JSON.stringify({
     id: `model-${Date.now()}`,
     action: "select_model",
@@ -168,7 +168,7 @@ if (model && tabId) {
 }
 
 // Step 3: Build and send prompt
-console.log("\n💬 Sending prompt...")
+console.log("\n Sending prompt...")
 const jsonMeta = JSON.stringify({
   title: metadata.title,
   channel: metadata.channel,
@@ -191,17 +191,17 @@ await $`mosquitto_pub -h ${MQTT_HOST} -p ${MQTT_PORT} -t ${MQTT_TOPIC_CMD} -m ${
 
 // Mode-specific completion message
 const modeEmoji: Record<string, string> = {
-  chat: "📝",
-  research: "🔬",
-  canvas: "📄"
+  chat: "",
+  research: "",
+  canvas: ""
 }
 
-console.log(`\n✅ Done! ${modeEmoji[mode] || "✅"}`)
+console.log(`\n Done! ${modeEmoji[mode] || ""}`)
 console.log(`   Mode: ${mode.toUpperCase()}`)
 console.log(`   Video: ${metadata.title}`)
 console.log(`   Tab ID: ${tabId || "unknown"}`)
 if (model) console.log(`   Model: ${model}`)
 
 // Output metadata for piping
-console.log("\n📋 Metadata:")
+console.log("\n Metadata:")
 console.log(JSON.stringify({ ...metadata, tabId, mode, model: model || "default" }))

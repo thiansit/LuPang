@@ -23,7 +23,7 @@ if (!topic) {
   process.exit(1);
 }
 
-console.log(`\n🔬 Deep Research: ${topic}\n`);
+console.log(`\n Deep Research: ${topic}\n`);
 
 // Helper to publish MQTT command
 async function mqttPub(payload: object): Promise<void> {
@@ -50,7 +50,7 @@ async function mqttSubOnce(timeoutSec: number = 10): Promise<string | null> {
 const ts = () => Date.now();
 
 // Step 1: Create new Gemini tab
-console.log("1️⃣ Creating new Gemini tab...");
+console.log("1 Creating new Gemini tab...");
 await mqttPub({
   id: `newtab-${ts()}`,
   action: "create_tab",
@@ -58,10 +58,10 @@ await mqttPub({
   ts: ts()
 });
 await Bun.sleep(4000);
-console.log("   ✓ Tab created");
+console.log("    Tab created");
 
 // Step 2: Select Deep Research mode
-console.log("2️⃣ Selecting Deep Research mode...");
+console.log("2 Selecting Deep Research mode...");
 await mqttPub({
   id: `mode-${ts()}`,
   action: "select_mode",
@@ -69,10 +69,10 @@ await mqttPub({
   ts: ts()
 });
 await Bun.sleep(2000);
-console.log("   ✓ Deep Research selected");
+console.log("    Deep Research selected");
 
 // Step 3: Send research prompt
-console.log("3️⃣ Sending research prompt...");
+console.log("3 Sending research prompt...");
 await mqttPub({
   id: `chat-${ts()}`,
   action: "chat",
@@ -80,16 +80,16 @@ await mqttPub({
   ts: ts()
 });
 await Bun.sleep(3000);
-console.log("   ✓ Prompt sent");
+console.log("    Prompt sent");
 
 // Step 4: Click "Start research" button
-console.log("4️⃣ Starting research...");
+console.log("4 Starting research...");
 await mqttPub({
   id: `click-${ts()}`,
   action: "clickText",
   text: "Start research",
   ts: ts()
 });
-console.log("   ✓ Research started!");
+console.log("    Research started!");
 
-console.log("\n🎉 Deep Research is running! Check your Gemini tab.\n");
+console.log("\n Deep Research is running! Check your Gemini tab.\n");

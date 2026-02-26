@@ -38,28 +38,28 @@ ls psi/inbox/.pending-retrospective
 ### 2. Generate Pulse Report
 
 ```markdown
-## 💓 Yamimi Heartbeat — [DATE]
+## Yamimi Heartbeat — [DATE]
 
-### 📊 Last 24 Hours
+### Last 24 Hours
 - Commits: [N]
 - Tasks completed: [list]
 - Time spent: [estimate]
 
-### 🎯 Current Focus
+### Current Focus
 [From focus.md]
 
-### ⚠️ Attention Needed
+### Attention Needed
 - [ ] Pending retrospective?
 - [ ] Uncommitted changes?
 - [ ] Stale incubate projects?
 
-### 💡 Suggested Focus Today
+### Suggested Focus Today
 Based on patterns:
 1. [Priority 1]
 2. [Priority 2]
 3. [Priority 3]
 
-### 🔮 Proactive Suggestions
+### Proactive Suggestions
 - [Thing you might forget]
 - [Follow-up from yesterday]
 ```
@@ -95,18 +95,18 @@ Works with:
 User: heartbeat
 
 Yamimi:
-💓 Yamimi Heartbeat — 2026-01-31
+ Yamimi Heartbeat — 2026-01-31
 
-📊 Last 24h: 3 commits, research session complete
-🎯 Focus: OpenClaw/SHRIMP research
-⚠️ Pending: Retrospective not created
+ Last 24h: 3 commits, research session complete
+ Focus: OpenClaw/SHRIMP research
+ Pending: Retrospective not created
 
-💡 Suggested:
+ Suggested:
 1. Run /rrr to capture learnings
 2. Continue Moltbook integration
 3. Review incubate/ cleanup
 
-🔮 Don't forget: Issue #3 response posted, await feedback
+ Don't forget: Issue #3 response posted, await feedback
 ```
 
 ---

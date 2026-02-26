@@ -24,7 +24,7 @@ const client = mqtt.connect(MQTT_URL, {
 const cmdId = "chat_" + Date.now();
 
 client.on("connect", () => {
-  console.log("✓ Connected to MQTT WebSocket");
+  console.log(" Connected to MQTT WebSocket");
 
   // Subscribe to response
   client.subscribe([TOPIC_RES, TOPIC_STATE]);
@@ -46,11 +46,11 @@ client.on("message", (topic, message) => {
 
     if (topic === TOPIC_RES && data.id === cmdId) {
       if (data.success !== false) {
-        console.log("✓ Message sent to Gemini");
+        console.log(" Message sent to Gemini");
         client.end();
         process.exit(0);
       } else {
-        console.log("✗ Error:", data.error || "Unknown error");
+        console.log(" Error:", data.error || "Unknown error");
         client.end();
         process.exit(1);
       }
@@ -58,7 +58,7 @@ client.on("message", (topic, message) => {
 
     if (topic === TOPIC_STATE && data.loading === false) {
       // Gemini finished responding
-      console.log("✓ Gemini ready (responseCount:", data.responseCount + ")");
+      console.log(" Gemini ready (responseCount:", data.responseCount + ")");
     }
   } catch (e) {
     // ignore parse errors
@@ -66,13 +66,13 @@ client.on("message", (topic, message) => {
 });
 
 client.on("error", (err) => {
-  console.error("✗ MQTT Error:", err.message);
+  console.error(" MQTT Error:", err.message);
   process.exit(1);
 });
 
 // Timeout after 10 seconds
 setTimeout(() => {
-  console.log("✗ Timeout waiting for response");
+  console.log(" Timeout waiting for response");
   client.end();
   process.exit(1);
 }, 10000);

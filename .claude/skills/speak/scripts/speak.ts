@@ -103,11 +103,11 @@ async function checkEdgeTts(): Promise<boolean> {
 async function listVoices(): Promise<void> {
   const hasEdgeTts = await checkEdgeTts();
 
-  console.log("\n🔊 Available Voices\n");
+  console.log("\n Available Voices\n");
   console.log("═".repeat(60));
 
   if (hasEdgeTts) {
-    console.log("\n📡 edge-tts voices (neural):\n");
+    console.log("\n edge-tts voices (neural):\n");
     const proc = Bun.spawn(["edge-tts", "--list-voices"], { stdout: "pipe" });
     const output = await new Response(proc.stdout).text();
 
@@ -123,10 +123,10 @@ async function listVoices(): Promise<void> {
     console.log(filtered.slice(0, 25).join("\n"));
     console.log("... (run 'edge-tts --list-voices' for full list)");
   } else {
-    console.log("\n⚠️  edge-tts not installed. Install with: pip install edge-tts\n");
+    console.log("\n  edge-tts not installed. Install with: pip install edge-tts\n");
   }
 
-  console.log("\n🍎 macOS voices:\n");
+  console.log("\n macOS voices:\n");
   const macProc = Bun.spawn(["say", "-v", "?"], { stdout: "pipe" });
   const macOutput = await new Response(macProc.stdout).text();
   const macFiltered = macOutput
@@ -154,7 +154,7 @@ async function speakWithEdgeTts(
       args.push("--rate", rate);
     }
 
-    console.log(`🔊 Speaking with ${voice}...`);
+    console.log(` Speaking with ${voice}...`);
 
     const proc = Bun.spawn(args, { stdout: "pipe", stderr: "pipe" });
     await proc.exited;
@@ -195,7 +195,7 @@ async function speakWithMac(
 
     args.push(text);
 
-    console.log(`🍎 Speaking with macOS voice: ${voice}...`);
+    console.log(` Speaking with macOS voice: ${voice}...`);
 
     const proc = Bun.spawn(args);
     await proc.exited;

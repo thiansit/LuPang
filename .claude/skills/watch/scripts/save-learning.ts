@@ -97,5 +97,5 @@ if (!existsSync(SLUGS_FILE)) {
 }
 appendFileSync(SLUGS_FILE, `${slug}: ${learningFile}\n`);
 
-console.log(`✅ Saved: ${learningFile}`);
-console.log(`📎 Slug: ${slug}`);
+console.log(` Saved: ${learningFile}`);
+console.log(` Slug: ${slug}`);

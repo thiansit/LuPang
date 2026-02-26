@@ -52,10 +52,10 @@ async function mqttSubWait(expectedId: string, timeoutSec: number = 10): Promise
 const ts = () => Date.now();
 
 async function main() {
-  console.log('\n🎬 YOUTUBE TRANSCRIBE FLOW\n');
+  console.log('\n YOUTUBE TRANSCRIBE FLOW\n');
 
   // 1. Create tab
-  console.log('1️⃣  Creating new Gemini tab...');
+  console.log('1  Creating new Gemini tab...');
   const createId = `create_tab_${ts()}`;
   await mqttPub({
     id: createId,
@@ -65,14 +65,14 @@ async function main() {
   });
   const tabResult = await mqttSubWait(createId, 8);
   const tabId = tabResult.tabId;
-  console.log(`   ✅ Tab ID: ${tabId || 'unknown'}`);
+  console.log(`    Tab ID: ${tabId || 'unknown'}`);
 
   // 2. Wait for load
-  console.log('2️⃣  Waiting 4s for load...');
+  console.log('2  Waiting 4s for load...');
   await Bun.sleep(4000);
 
   // 3. Badge
-  console.log('3️⃣  Injecting badge...');
+  console.log('3  Injecting badge...');
   await mqttPub({
     id: `badge_${ts()}`,
     action: "inject_badge",
@@ -83,7 +83,7 @@ async function main() {
   await Bun.sleep(500);
 
   // 4. Send transcribe request
-  console.log('4️⃣  Sending transcribe request...');
+  console.log('4  Sending transcribe request...');
   const prompt = `Please watch and transcribe this YouTube video. Provide:
 1. A summary of the main points
 2. Key timestamps if possible
@@ -98,9 +98,9 @@ Video: ${youtubeUrl}`;
     text: prompt,
     ts: ts()
   });
-  console.log('   ✅ Request sent!');
+  console.log('    Request sent!');
 
-  console.log('\n🎉 DONE!');
+  console.log('\n DONE!');
   console.log(`   Tab ID: ${tabId}`);
   console.log(`   Video: ${youtubeUrl}`);
   console.log('   Check Gemini for transcription!\n');

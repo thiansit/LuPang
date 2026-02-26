@@ -36,30 +36,30 @@ async function main() {
   try {
     console.log('Trying list_tabs...');
     const tabs = await send('list_tabs');
-    console.log('✓ list_tabs works! Found', tabs.count, 'tabs');
+    console.log(' list_tabs works! Found', tabs.count, 'tabs');
     tabs.tabs?.forEach((t: any) => console.log('  -', t.id, t.title?.slice(0, 30)));
   } catch (e: any) {
-    console.log('✗ list_tabs:', e.message);
+    console.log(' list_tabs:', e.message);
   }
 
   // Try create_tab
   try {
     console.log('\nTrying create_tab...');
     const tab = await send('create_tab');
-    console.log('✓ create_tab works! tabId:', tab.tabId);
+    console.log(' create_tab works! tabId:', tab.tabId);
 
     // Try inject_badge on new tab
     await new Promise(r => setTimeout(r, 2000));
     console.log('\nTrying inject_badge...');
     const badge = await send('inject_badge', { tabId: tab.tabId, text: 'TEST' });
-    console.log('✓ inject_badge works!');
+    console.log(' inject_badge works!');
 
     // Try chat on new tab
     console.log('\nTrying chat...');
     const chat = await send('chat', { tabId: tab.tabId, text: 'Hello!' });
-    console.log('✓ chat result:', JSON.stringify(chat));
+    console.log(' chat result:', JSON.stringify(chat));
   } catch (e: any) {
-    console.log('✗', e.message);
+    console.log('', e.message);
   }
 
   client.end();

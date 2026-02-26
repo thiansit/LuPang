@@ -93,7 +93,7 @@ oracle_learn({
 ## Output Summary
 
 ```markdown
-## 🎬 Video Learned: [TITLE]
+## Video Learned: [TITLE]
 
 **Source**: [YOUTUBE_URL]
 **Gemini**: [GEMINI_CONVERSATION_URL]
@@ -103,7 +103,7 @@ oracle_learn({
 
 ### Saved To
 - Learning: psi/memory/learnings/[DATE]_[SLUG].md
-- Oracle: Indexed ✓
+- Oracle: Indexed 
 
 ### Quick Access
 `/trace [SLUG]` or `oracle_search("[TITLE]")`

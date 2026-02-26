@@ -36,7 +36,7 @@ GHQ_ROOT=$(ghq root)
 git clone "$GHQ_ROOT/github.com/owner/repo" psi/learn/repo-name
 ```
 
-**Output**: "✓ Linked [repo] to psi/learn/repo-name"
+**Output**: " Linked [repo] to psi/learn/repo-name"
 
 ### incubate [url|slug]
 
@@ -49,7 +49,7 @@ GHQ_ROOT=$(ghq root)
 git clone "$GHQ_ROOT/github.com/owner/repo" psi/incubate/repo-name
 ```
 
-**Output**: "✓ Linked [repo] to psi/incubate/repo-name"
+**Output**: " Linked [repo] to psi/incubate/repo-name"
 
 ### find [query]
 
@@ -70,13 +70,13 @@ ls -la psi/learn/ psi/incubate/ | grep -i "query"
 Show all tracked projects:
 
 ```bash
-echo "📚 Learn"
+echo " Learn"
 ls -la psi/learn/ | grep "^l" | awk '{print "  " $NF " → " $11}'
 
-echo "🌱 Incubate"
+echo " Incubate"
 ls -la psi/incubate/ | grep "^l" | awk '{print "  " $NF " → " $11}'
 
-echo "🏠 External (ghq)"
+echo " External (ghq)"
 ghq list | grep -v "laris-co/Nat-s-Agents" | head -10
 ```
 
@@ -118,7 +118,7 @@ User: "I want to contribute to claude-mem"
 
 ## Anti-Patterns
 
-| ❌ Wrong | ✅ Right |
+|  Wrong |  Right |
 |----------|----------|
 | `git clone` directly to psi/ | `ghq get` then symlink |
 | Nested paths: `psi/learn/repo/github.com/...` | Flat: `psi/learn/repo-name` |

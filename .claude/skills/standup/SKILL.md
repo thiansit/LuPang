@@ -10,7 +10,7 @@ Quick check: pending tasks, appointments, recent progress.
 
 ## Step 0: Timestamp
 ```bash
-date "+🕐 %H:%M %Z (%A %d %B %Y)"
+date "+ %H:%M %Z (%A %d %B %Y)"
 ```
 
 ---
@@ -31,7 +31,7 @@ Gather info from multiple sources:
 ```bash
 gh api repos/laris-co/nat-location-data/contents/current.csv --jq '.content' | base64 -d | grep iPhone | head -1 | cut -d',' -f9
 ```
-Show: "📍 Currently at: [place]"
+Show: " Currently at: [place]"
 
 ### 1. Open Issues (งานค้าง)
 ```bash
@@ -84,7 +84,7 @@ ls -t psi/memory/retrospectives/**/*.md | head -1
 - [suggest based on priorities]
 
 ---
-💡 `/schedule` to see full calendar
+ `/schedule` to see full calendar
 ```
 
 ---

@@ -85,7 +85,7 @@ What's needed to unblock?
 ### Path: GIT_CONFLICT_STATE
 
 ```markdown
-# RECAP — 🚩 Git In Merge/Rebase
+# RECAP —  Git In Merge/Rebase
 
 [TIME]
 
@@ -297,7 +297,7 @@ Commit first? Or reset?
 
 ## Complete
 
-**Task**: [from focus] ✓
+**Task**: [from focus] 
 
 **Session did**: [from handoff or last retro—2 bullet points max]
 

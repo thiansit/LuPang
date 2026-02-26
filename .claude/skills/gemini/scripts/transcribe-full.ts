@@ -28,26 +28,26 @@ async function main() {
   await new Promise(r => client.on('connect', r));
   client.subscribe(TOPIC_RES);
 
-  console.log('\n📝 FULL TRANSCRIBE FLOW\n');
+  console.log('\n FULL TRANSCRIBE FLOW\n');
   console.log('Video:', url);
 
   // 1. Create tab
-  console.log('\n1️⃣  Creating tab...');
+  console.log('\n1  Creating tab...');
   const tab = await send('create_tab');
   const tabId = tab.tabId;
   console.log('   Tab:', tabId);
 
   // 2. Wait for load
-  console.log('2️⃣  Waiting 4s...');
+  console.log('2  Waiting 4s...');
   await new Promise(r => setTimeout(r, 4000));
 
   // 3. Select fast model
-  console.log('3️⃣  Selecting Fast model...');
+  console.log('3  Selecting Fast model...');
   await send('select_model', { tabId, model: 'fast' });
   await new Promise(r => setTimeout(r, 1000));
 
   // 4. Send transcribe prompt
-  console.log('4️⃣  Sending transcribe prompt...');
+  console.log('4  Sending transcribe prompt...');
   const prompt = `Transcribe this YouTube video with timestamps:
 
 ${url}
@@ -60,18 +60,18 @@ Format each section like:
 Include ALL spoken content minute by minute.`;
 
   await send('chat', { tabId, text: prompt });
-  console.log('   ✅ Sent!');
+  console.log('    Sent!');
 
   // 5. Click "Try now" if needed
-  console.log('5️⃣  Clicking "Try now" if visible...');
+  console.log('5  Clicking "Try now" if visible...');
   await new Promise(r => setTimeout(r, 2000));
   await send('click_text', { tabId, text: 'Try now' });
 
-  console.log('\n⏳ Waiting 30s for transcription...');
+  console.log('\n Waiting 30s for transcription...');
   await new Promise(r => setTimeout(r, 30000));
 
   // 6. Get response
-  console.log('6️⃣  Getting response...');
+  console.log('6  Getting response...');
   const response = await send('get_response', { tabId });
 
   console.log('\n=== TRANSCRIPTION ===\n');

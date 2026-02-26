@@ -63,7 +63,7 @@ After creating handoff:
 ### Step 1: Call EnterPlanMode Tool
 
 ```
-⚠️ REQUIRED ACTION: Call the EnterPlanMode tool NOW
+ REQUIRED ACTION: Call the EnterPlanMode tool NOW
 ```
 
 Do NOT skip this step. Do NOT ask user if they want plan mode.
@@ -102,6 +102,6 @@ After approval → Ready for `/compact` then `/clear`
 
 If user says `/forward --only` or context is very low:
 - Skip plan mode
-- Just tell user: "💡 Run /plan to plan next session"
+- Just tell user: " Run /plan to plan next session"
 
 ARGUMENTS: $ARGUMENTS

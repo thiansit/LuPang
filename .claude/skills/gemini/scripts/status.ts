@@ -88,28 +88,28 @@ function formatTime(ts: number): string {
 }
 
 // Main
-console.log("\n🔮 Gemini Proxy Status\n");
+console.log("\n Gemini Proxy Status\n");
 console.log("═".repeat(60));
 
 // 1. Extension Status
 const status = await getStatus();
 if (status) {
-  const statusIcon = status.status === "online" ? "🟢" : "🔴";
+  const statusIcon = status.status === "online" ? "[OK]" : "[!!]";
   console.log(`\n${statusIcon} Extension: ${status.status.toUpperCase()}`);
   console.log(`   Version: ${status.version}`);
   console.log(`   Last seen: ${formatTime(status.timestamp)}`);
 } else {
-  console.log("\n🔴 Extension: OFFLINE or not connected");
+  console.log("\n[!!] Extension: OFFLINE or not connected");
   process.exit(1);
 }
 
 // 2. List Tabs
-console.log("\n📑 Tabs:");
+console.log("\n Tabs:");
 const tabsResponse = await sendCommand("list_tabs");
 
 if (tabsResponse?.tabs?.length > 0) {
   for (const tab of tabsResponse.tabs) {
-    const active = tab.active ? "⭐" : "  ";
+    const active = tab.active ? ">" : " ";
     const shortUrl = tab.url.replace("https://gemini.google.com", "");
     console.log(`   ${active} ${tab.id} │ ${tab.title.substring(0, 30)} │ ${shortUrl}`);
   }
@@ -119,13 +119,13 @@ if (tabsResponse?.tabs?.length > 0) {
 }
 
 // 3. MQTT Topics
-console.log("\n📡 MQTT Topics:");
+console.log("\n MQTT Topics:");
 console.log(`   Command:  ${MQTT_TOPIC_CMD}`);
 console.log(`   Response: ${MQTT_TOPIC_RSP}`);
 console.log(`   Status:   ${MQTT_TOPIC_STATUS}`);
 
 // 4. Quick Commands
-console.log("\n⚡ Quick Commands:");
+console.log("\n Quick Commands:");
 console.log("   bun list-tabs.ts          # List all tabs");
 console.log("   bun deep-research.ts \"q\"  # Start Deep Research");
 console.log("   bun send-chat.ts \"msg\"    # Send chat message");

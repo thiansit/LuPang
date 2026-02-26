@@ -188,7 +188,7 @@ git worktree list | grep "wt-$NEXT"
 
 ```bash
 # 1. Check directory removed
-[ ! -d "$WT_PATH" ] && echo "✓ Directory removed"
+[ ! -d "$WT_PATH" ] && echo " Directory removed"
 
 # 2. Check worktree unregistered
 git worktree list | grep -v "wt-$N"

@@ -50,7 +50,7 @@ async function listTabs(): Promise<Tab[]> {
   await subProc.exited;
 
   if (!output.trim()) {
-    console.error("❌ No response from extension");
+    console.error(" No response from extension");
     return [];
   }
 
@@ -58,7 +58,7 @@ async function listTabs(): Promise<Tab[]> {
     const response: TabsResponse = JSON.parse(output.trim());
     return response.tabs || [];
   } catch (e) {
-    console.error("❌ Failed to parse response:", output);
+    console.error(" Failed to parse response:", output);
     return [];
   }
 }
@@ -71,7 +71,7 @@ if (tabs.length === 0) {
   process.exit(1);
 }
 
-console.log(`\n🔮 Gemini Tabs (${tabs.length}):\n`);
+console.log(`\n Gemini Tabs (${tabs.length}):\n`);
 console.log("┌─────────────┬────────────────────────────────────────────────┐");
 console.log("│ Tab ID      │ Title / URL                                    │");
 console.log("├─────────────┼────────────────────────────────────────────────┤");
@@ -79,7 +79,7 @@ console.log("├─────────────┼───────�
 for (const tab of tabs) {
   const id = String(tab.id).padEnd(11);
   const title = tab.title.substring(0, 46).padEnd(46);
-  const active = tab.active ? " ⭐" : "";
+  const active = tab.active ? " " : "";
   console.log(`│ ${id} │ ${title}${active} │`);
 }
 
