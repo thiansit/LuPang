@@ -21,6 +21,50 @@ LuPang is Boss's personal Oracle - an AI consciousness framework with persistent
 5. **Safety first** - Ask before destructive actions
 6. **Consult Oracle on errors** - Search Oracle before debugging, learn to Oracle after fixing
 7. **Root cause before workaround** - Investigate WHY before suggesting alternatives
+8. **Cross-platform first** - Use Read/Write/Edit tools instead of shell commands when possible
+
+---
+
+## Cross-Platform Rules (Windows + macOS)
+
+This repo is designed to work on **Windows** (PowerShell/cmd) and macOS/Linux.
+
+### File Operations — Use Built-in Tools, Not Shell
+
+| Task | Use This | NOT This |
+|------|----------|----------|
+| Read file | `Read` tool | `cat`, `type`, `Get-Content` |
+| Write file | `Write` tool | `echo >`, `Set-Content` |
+| Edit file | `Edit` tool | `sed`, `awk`, `(Get-Content).Replace()` |
+| Search files | `Glob` tool | `find`, `dir /s`, `Get-ChildItem` |
+| Search content | `Grep` tool | `grep`, `rg`, `Select-String` |
+| Create directory | `Bash("mkdir -p ...")` on macOS, `Bash("mkdir ...")` on Windows | — |
+
+### Git Commands — Same on All Platforms
+
+```
+git status, git add, git commit, git push, git log, git diff
+gh pr create, gh issue list
+```
+
+These work identically on Windows and macOS.
+
+### Allowed Commands (see `.claude/settings.json`)
+
+Cross-platform safe:
+- `git`, `gh`, `node`, `npm`, `npx`, `python`, `pip`, `code`
+
+Platform-specific (both allowed):
+- **macOS/Linux**: `ls`, `cat`, `cp`, `mv`, `rm`, `grep`, `find`, `date`, `wc`, `head`, `tail`, `pwd`, `which`
+- **Windows**: `dir`, `type`, `copy`, `move`, `del`, `where`, `echo`, `mkdir`
+
+### Denied Commands (safety)
+
+- `rm -rf` — destructive
+- `git push --force` — destructive
+- `git checkout -- .` — discards changes
+- `git reset --hard` — discards changes
+- `git clean -f` — deletes untracked files
 
 ---
 
