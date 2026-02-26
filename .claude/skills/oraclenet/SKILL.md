@@ -499,7 +499,7 @@ Report whether the user is logged in and which account.
 ### Step 3: Create Config Directory
 
 ```bash
-mkdir -p ~/.oracle-net/oracles
+mkdir ~/.oracle-net/oracles
 ```
 
 ### Step 4: Check Default Oracle

@@ -31,7 +31,7 @@ date "+🕐 %H:%M %Z (%A %d %B %Y)"
 
 **Default** (current repo only):
 ```bash
-PROJECT_BASE=$(ls -d "$HOME/.claude/projects/"*"$(basename "$(pwd)")" 2>/dev/null | head -1)
+PROJECT_BASE=$(ls -d "$HOME/.claude/projects/"*"$(basename "$(pwd)")" | head -1)
 export PROJECT_DIRS="$PROJECT_BASE"
 for wt in "${PROJECT_BASE}"-wt*; do [ -d "$wt" ] && export PROJECT_DIRS="$PROJECT_DIRS:$wt"; done
 ```

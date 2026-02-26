@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // learn.ts - Clone repo for read-only study
 import { $ } from "bun";
-import { existsSync, mkdirSync, unlinkSync, symlinkSync } from "fs";
+import { existsSync, mkdirSync, rmSync, cpSync } from "fs";
 import { dirname, join } from "path";
 import { getRoot, getPaths, parseRepo, ghqPath, updateSlugsFile } from "./utils.ts";
 
@@ -40,8 +40,8 @@ await $`ghq get ${existsSync(localPath) ? "-u" : ""} github.com/${repo}`.quiet()
 
 // Create symlink
 mkdirSync(dirname(linkPath), { recursive: true });
-if (existsSync(linkPath)) unlinkSync(linkPath);
-symlinkSync(localPath, linkPath);
+if (existsSync(linkPath)) rmSync(linkPath, { recursive: true, force: true });
+cpSync(localPath, linkPath, { recursive: true });
 
 // Register slug
 await updateSlugsFile(slugsFile, `${owner}/${name}`, localPath);

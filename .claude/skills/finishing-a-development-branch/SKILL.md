@@ -41,7 +41,7 @@ Stop. Don't proceed to Step 2.
 
 ```bash
 # Try common base branches
-git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
+git merge-base HEAD main || git merge-base HEAD master
 ```
 
 Or ask: "This branch split from main - is that correct?"

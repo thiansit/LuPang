@@ -1,6 +1,6 @@
-// utils.ts - Shared utilities for project scripts
+// utils.ts - Shared utilities for project scripts (cross-platform)
 import { Glob } from "bun";
-import { existsSync, lstatSync, readlinkSync } from "fs";
+import { existsSync, lstatSync, readdirSync, statSync } from "fs";
 import { join, basename, dirname } from "path";
 import { homedir } from "os";
 
@@ -16,10 +16,10 @@ export function getRoot(): string {
 
 export function getPaths(root: string) {
   return {
-    slugsFile: join(root, "ψ/memory/slugs.yaml"),
-    learnDir: join(root, "ψ/learn/repo/github.com"),
-    incubateDir: join(root, "ψ/incubate/repo/github.com"),
-    logDir: join(root, "ψ/memory/logs"),
+    slugsFile: join(root, "psi", "memory", "slugs.yaml"),
+    learnDir: join(root, "psi", "learn", "repo", "github.com"),
+    incubateDir: join(root, "psi", "incubate", "repo", "github.com"),
+    logDir: join(root, "psi", "memory", "logs"),
   };
 }
 
@@ -44,30 +44,36 @@ export function parseRepo(input: string, defaultOrg = "laris-co"): RepoInfo {
 }
 
 export function ghqPath(owner: string, name: string): string {
-  return join(homedir(), "Code/github.com", owner, name);
+  // Cross-platform: use Code/github.com under home directory
+  return join(homedir(), "Code", "github.com", owner, name);
 }
 
-// --- Symlink operations ---
+// --- Directory listing (cross-platform, replaces symlink scanning) ---
 export type LinkInfo = { path: string; org: string; repo: string; slug: string; target?: string };
 
-export async function getSymlinks(baseDir: string): Promise<LinkInfo[]> {
+export async function getProjectDirs(baseDir: string): Promise<LinkInfo[]> {
   if (!existsSync(baseDir)) return [];
 
   const links: LinkInfo[] = [];
-  const glob = new Glob("*/*");
-
-  for await (const match of glob.scan({ cwd: baseDir, onlyFiles: false })) {
-    const fullPath = join(baseDir, match);
-    try {
-      if (lstatSync(fullPath).isSymbolicLink()) {
-        const [org, repo] = match.split("/");
-        const target = (() => { try { return readlinkSync(fullPath); } catch { return undefined; } })();
-        links.push({ path: fullPath, org, repo, slug: `${org}/${repo}`, target });
+  try {
+    const orgs = readdirSync(baseDir).filter(d => {
+      try { return statSync(join(baseDir, d)).isDirectory(); } catch { return false; }
+    });
+    for (const org of orgs) {
+      const orgDir = join(baseDir, org);
+      const repos = readdirSync(orgDir).filter(d => {
+        try { return statSync(join(orgDir, d)).isDirectory(); } catch { return false; }
+      });
+      for (const repo of repos) {
+        links.push({ path: join(orgDir, repo), org, repo, slug: `${org}/${repo}` });
       }
-    } catch {}
-  }
+    }
+  } catch {}
   return links;
 }
+
+// Keep old name as alias for backward compat
+export const getSymlinks = getProjectDirs;
 
 export function matchesSlug(link: LinkInfo, slug: string): boolean {
   return slug.includes("/") ? link.slug === slug : link.repo === slug;
@@ -85,7 +91,9 @@ export async function findInSlugs(slugsFile: string, input: string): Promise<str
       (!input.includes("/") && line.startsWith(`${input}:`));
 
     if (matches) {
-      const path = line.split(":").slice(1).join(":").trim().replace(/^~/, homedir());
+      // Handle both Unix (~) and Windows paths
+      const rawPath = line.split(":").slice(1).join(":").trim();
+      const path = rawPath.replace(/^~/, homedir());
       if (existsSync(path)) return path;
     }
   }

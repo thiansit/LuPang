@@ -61,5 +61,5 @@ const merged = {
 
 const filePath = join(ORACLES_DIR, `${merged.slug}.json`)
 await writeFile(filePath, JSON.stringify(merged, null, 2) + '\n')
-await chmod(filePath, 0o600)
+try { await chmod(filePath, 0o600) } catch {} // chmod not supported on Windows
 console.log(JSON.stringify({ saved: filePath, ...merged, bot_key: merged.bot_key ? '***' : '' }))

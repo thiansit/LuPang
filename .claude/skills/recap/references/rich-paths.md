@@ -11,15 +11,15 @@ Full detection for edge cases. Use when:
 ROOT=$(git rev-parse --show-toplevel)
 
 # Git state
-BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
-MODIFIED=$(git status --short 2>/dev/null | wc -l)
-CONFLICTS=$(git diff --name-only --diff-filter=U 2>/dev/null | wc -l)
+BRANCH=$(git rev-parse --abbrev-ref HEAD || echo "unknown")
+MODIFIED=$(git status --short | wc -l)
+CONFLICTS=$(git diff --name-only --diff-filter=U | wc -l)
 
 # Focus file
 FOCUS_FILE="$ROOT/psi/inbox/focus-agent-main.md"
 if [ -f "$FOCUS_FILE" ]; then
   FOCUS_STATE=$(head -1 "$FOCUS_FILE" | sed 's/STATE: //')
-  FOCUS_MTIME=$(stat -f%m "$FOCUS_FILE" 2>/dev/null)
+  FOCUS_MTIME=$(stat -f%m "$FOCUS_FILE")
   NOW=$(date +%s)
   FOCUS_HOURS=$(( (NOW - FOCUS_MTIME) / 3600 ))
   grep -q "^STATE:" "$FOCUS_FILE" || FOCUS_STATE="corrupted"
@@ -32,7 +32,7 @@ ACTIVITY_LOG="$ROOT/psi/memory/logs/activity.log"
 [ -f "$ACTIVITY_LOG" ] && LAST_ACTIVITY=$(tail -1 "$ACTIVITY_LOG" | cut -d'|' -f3 | xargs)
 
 # Latest retro
-LATEST_RETRO=$(find "$ROOT/psi/memory/retrospectives" -name "*.md" -type f 2>/dev/null | grep -v CLAUDE | sort -r | head -1)
+LATEST_RETRO=$(find "$ROOT/psi/memory/retrospectives" -name "*.md" -type f | grep -v CLAUDE | sort -r | head -1)
 ```
 
 ## Detection Precedence (In Order)
@@ -319,14 +319,14 @@ What's next?
 **Data gathering for TRANSITION**:
 ```bash
 # Get session summary from handoff (if exists)
-HANDOFF=$(ls -t "$ROOT/psi/inbox/handoff/"*.md 2>/dev/null | head -1)
+HANDOFF=$(ls -t "$ROOT/psi/inbox/handoff/"*.md | head -1)
 [ -f "$HANDOFF" ] && grep -A5 "## What We Did" "$HANDOFF" | head -6
 
 # Get last commit
 git -C "$ROOT" log -1 --oneline
 
 # Get hot tracks
-ls "$ROOT/psi/inbox/tracks/"*.md 2>/dev/null | head -3
+ls "$ROOT/psi/inbox/tracks/"*.md | head -3
 ```
 
 ---

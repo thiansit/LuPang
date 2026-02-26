@@ -17,7 +17,7 @@ console.log(`\n${time} | ${date}\n\n---\n`);
 
 // Focus
 console.log("## FOCUS");
-const focusFile = join(ROOT, "ψ/inbox/focus-agent-main.md");
+const focusFile = join(ROOT, "psi/inbox/focus-agent-main.md");
 if (existsSync(focusFile)) {
   const content = await Bun.file(focusFile).text();
   const state = content.match(/^STATE:(.*)$/m)?.[1]?.trim() || "none";
@@ -29,7 +29,7 @@ if (existsSync(focusFile)) {
 
 // Schedule
 console.log("\n## TODAY");
-const scheduleFile = join(ROOT, "ψ/inbox/schedule.md");
+const scheduleFile = join(ROOT, "psi/inbox/schedule.md");
 if (existsSync(scheduleFile)) {
   const schedule = await Bun.file(scheduleFile).text();
   const todayNum = now.getDate();
@@ -48,7 +48,7 @@ console.log(await $`git -C ${ROOT} log --oneline -3`.text());
 
 // Tracks
 console.log("## TRACKS");
-const tracksDir = join(ROOT, "ψ/inbox/tracks");
+const tracksDir = join(ROOT, "psi/inbox/tracks");
 if (existsSync(tracksDir)) {
   const tracks = readdirSync(tracksDir)
     .filter((f) => f.endsWith(".md") && !f.includes("INDEX") && !f.includes("CLAUDE"))
@@ -63,7 +63,7 @@ if (existsSync(tracksDir)) {
 
 // Latest retro
 console.log("\n---\n\n## LAST SESSION");
-const retroDir = join(ROOT, `ψ/memory/retrospectives/${month}`);
+const retroDir = join(ROOT, `psi/memory/retrospectives/${month}`);
 if (existsSync(retroDir)) {
   const days = readdirSync(retroDir).filter((d) => !d.startsWith(".")).sort().reverse();
   for (const day of days) {
@@ -79,7 +79,7 @@ if (existsSync(retroDir)) {
 }
 
 // Handoff
-const handoffDir = join(ROOT, "ψ/inbox/handoff");
+const handoffDir = join(ROOT, "psi/inbox/handoff");
 if (existsSync(handoffDir)) {
   const handoffs = readdirSync(handoffDir).filter((f) => f.endsWith(".md") && !f.includes("CLAUDE")).sort().reverse();
   if (handoffs.length) {

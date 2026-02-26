@@ -21,8 +21,8 @@ Follow this priority order:
 
 ```bash
 # Check in priority order
-ls -d .worktrees 2>/dev/null     # Preferred (hidden)
-ls -d worktrees 2>/dev/null      # Alternative
+ls -d .worktrees     # Preferred (hidden)
+ls -d worktrees      # Alternative
 ```
 
 **If found:** Use that directory. If both exist, `.worktrees` wins.
@@ -30,7 +30,7 @@ ls -d worktrees 2>/dev/null      # Alternative
 ### 2. Check CLAUDE.md
 
 ```bash
-grep -i "worktree.*director" CLAUDE.md 2>/dev/null
+grep -i "worktree.*director" CLAUDE.md
 ```
 
 **If preference specified:** Use it without asking.
@@ -56,7 +56,7 @@ Which would you prefer?
 
 ```bash
 # Check if directory is ignored (respects local, global, and system gitignore)
-git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
+git check-ignore -q .worktrees || git check-ignore -q worktrees
 ```
 
 **If NOT ignored:**

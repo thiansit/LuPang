@@ -43,7 +43,7 @@ async function reunionSingle(slug: string) {
   const manifest = join(logDir, `index-${today()}-${link.slug.replace("/", "_")}.json`);
   const files: string[] = [];
 
-  for (const dir of ["ψ/memory", "learnings", "retrospectives", "docs"]) {
+  for (const dir of ["psi/memory", "learnings", "retrospectives", "docs"]) {
     const fullDir = join(link.target, dir);
     if (!existsSync(fullDir)) continue;
     

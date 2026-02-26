@@ -43,7 +43,7 @@ date "+🕐 %H:%M %Z (%A %d %B %Y)"
 Create `.claude/settings.local.json` to avoid permission prompts:
 
 ```bash
-mkdir -p .claude && cat > .claude/settings.local.json << 'EOF'
+mkdir .claude && cat > .claude/settings.local.json << 'EOF'
 {
   "permissions": {
     "allow": [
@@ -271,7 +271,7 @@ Use `--deep` for thorough multi-agent search across all sources.
 ### Create the psi/ Folder
 
 ```bash
-mkdir -p psi/{inbox,memory/{resonance,learnings,retrospectives,logs},writing,lab,active,archive,outbox,learn}
+mkdir psi/{inbox,memory/{resonance,learnings,retrospectives,logs},writing,lab,active,archive,outbox,learn}
 ```
 
 ### Verify Structure

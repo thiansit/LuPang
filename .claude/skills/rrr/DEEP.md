@@ -10,7 +10,7 @@ ROOT="$(pwd)"
 TODAY=$(date +%Y-%m-%d)
 TIME=$(date +%H%M)
 DATE_PATH=$(date "+%Y-%m/%d")
-mkdir -p "$ROOT/psi/memory/retrospectives/$DATE_PATH"
+mkdir "$ROOT/psi/memory/retrospectives/$DATE_PATH"
 ```
 
 ## Step 1: Launch 5 Parallel Agents

@@ -74,7 +74,7 @@ echo "✓ Cloned to ghq: $TARGET_REPO"
 ## Step 2: Create Trace Log Directory
 
 ```bash
-mkdir -p "$ROOT/psi/memory/traces/$TODAY"
+mkdir "$ROOT/psi/memory/traces/$TODAY"
 TRACE_FILE="$ROOT/psi/memory/traces/$TODAY/${TIME}_[query-slug].md"
 ```
 
@@ -141,7 +141,7 @@ gh pr list --repo [owner/repo] --search "[query]" --limit 10
 ### Agent 4: Other Repos (ghq, ~/Code)
 Search other locations:
 ```bash
-find $(ghq root) -maxdepth 3 -name "*[query]*" 2>/dev/null | head -20
+find $(ghq root) -maxdepth 3 -name "*[query]*" | head -20
 ```
 
 ### Agent 5: Oracle Memory (psi/)

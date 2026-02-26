@@ -34,8 +34,8 @@ ghq get -u https://github.com/owner/repo
 
 # 2. Create org/repo symlink structure
 GHQ_ROOT=$(ghq root)
-mkdir -p psi/learn/owner
-ln -sf "$GHQ_ROOT/github.com/owner/repo" psi/learn/owner/repo
+mkdir psi/learn/owner
+git clone "$GHQ_ROOT/github.com/owner/repo" psi/learn/owner/repo
 ```
 
 **Output**: "✓ Linked [repo] to psi/learn/owner/repo"
@@ -48,8 +48,8 @@ Clone repo for **active development** with optional workflow flags.
 # Same flow, different target
 ghq get -u https://github.com/owner/repo
 GHQ_ROOT=$(ghq root)
-mkdir -p psi/incubate/owner
-ln -sf "$GHQ_ROOT/github.com/owner/repo" psi/incubate/owner/repo
+mkdir psi/incubate/owner
+git clone "$GHQ_ROOT/github.com/owner/repo" psi/incubate/owner/repo
 ```
 
 **Output**: "✓ Linked [repo] to psi/incubate/owner/repo"
@@ -68,8 +68,8 @@ ln -sf "$GHQ_ROOT/github.com/owner/repo" psi/incubate/owner/repo
 Remove symlink after work is done (manual trigger):
 
 ```bash
-unlink psi/incubate/owner/repo
-rmdir psi/incubate/owner 2>/dev/null
+rm -rf psi/incubate/owner/repo
+rmdir psi/incubate/owner
 # ghq clone preserved for future use
 ```
 
@@ -85,7 +85,7 @@ git -C psi/incubate/owner/repo checkout -b feat/feature-2
 # ... work, commit, push, PR ...
 
 # 2. When all done, offload (ghq kept for PR feedback)
-unlink psi/incubate/owner/repo
+rm -rf psi/incubate/owner/repo
 ```
 
 **Use case**: Extended contribution period. Keep ghq for addressing PR reviews.
@@ -125,7 +125,7 @@ Search for project across all locations:
 ghq list | grep -i "query"
 
 # Search learn/incubate symlinks (org/repo structure)
-find psi/learn psi/incubate -type l 2>/dev/null | grep -i "query"
+find psi/learn psi/incubate -type l | grep -i "query"
 ```
 
 **Output**: List matches with their ghq paths
@@ -136,13 +136,13 @@ Show all tracked projects:
 
 ```bash
 echo "📚 Learn"
-find psi/learn -type l 2>/dev/null | while read link; do
+find psi/learn -type l | while read link; do
   target=$(readlink "$link")
   echo "  ${link#psi/learn/} → $target"
 done
 
 echo "🌱 Incubate"
-find psi/incubate -type l 2>/dev/null | while read link; do
+find psi/incubate -type l | while read link; do
   target=$(readlink "$link")
   echo "  ${link#psi/incubate/} → $target"
 done
@@ -168,7 +168,7 @@ When listing, verify symlinks are valid:
 
 ```bash
 # Check for broken symlinks
-find psi/learn psi/incubate -type l ! -exec test -e {} \; -print 2>/dev/null
+find psi/learn psi/incubate -type l ! -exec test -e {} \; -print
 ```
 
 If broken: `ghq get -u [url]` to restore source.
@@ -179,8 +179,8 @@ If broken: `ghq get -u [url]` to restore source.
 # User shares URL to study
 User: "I want to learn from https://github.com/SawyerHood/dev-browser"
 → ghq get -u https://github.com/SawyerHood/dev-browser
-→ mkdir -p psi/learn/SawyerHood
-→ ln -sf ~/Code/github.com/SawyerHood/dev-browser psi/learn/SawyerHood/dev-browser
+→ mkdir psi/learn/SawyerHood
+→ git clone ~/Code/github.com/SawyerHood/dev-browser psi/learn/SawyerHood/dev-browser
 
 # User wants to develop long-term
 User: "I want to work on claude-mem"
@@ -217,16 +217,16 @@ User: "Quick README fix on oracle-skills-cli"
 
 ```bash
 # Add to learn
-ghq get -u URL && mkdir -p psi/learn/owner && ln -sf "$(ghq root)/github.com/owner/repo" psi/learn/owner/repo
+ghq get -u URL && mkdir psi/learn/owner && git clone "$(ghq root)/github.com/owner/repo" psi/learn/owner/repo
 
 # Add to incubate
-ghq get -u URL && mkdir -p psi/incubate/owner && ln -sf "$(ghq root)/github.com/owner/repo" psi/incubate/owner/repo
+ghq get -u URL && mkdir psi/incubate/owner && git clone "$(ghq root)/github.com/owner/repo" psi/incubate/owner/repo
 
 # Offload (remove symlink only)
-unlink psi/incubate/owner/repo && rmdir psi/incubate/owner 2>/dev/null
+rm -rf psi/incubate/owner/repo && rmdir psi/incubate/owner
 
 # Offload + purge (remove symlink AND ghq clone)
-unlink psi/incubate/owner/repo && rm -rf "$(ghq root)/github.com/owner/repo"
+rm -rf psi/incubate/owner/repo && rm -rf "$(ghq root)/github.com/owner/repo"
 
 # Update source
 ghq get -u URL

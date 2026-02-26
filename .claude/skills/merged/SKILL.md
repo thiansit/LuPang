@@ -41,7 +41,7 @@ git pull origin main
 git branch -d $BRANCH
 
 # Delete remote branch (if it still exists)
-git push origin --delete $BRANCH 2>/dev/null || echo "Remote branch already deleted"
+git push origin --delete $BRANCH || echo "Remote branch already deleted"
 ```
 
 ### Step 4: Confirm cleanup

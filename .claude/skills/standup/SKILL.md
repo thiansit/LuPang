@@ -40,12 +40,12 @@ gh issue list --state open --limit 10 --json number,title,updatedAt --jq '.[] | 
 
 ### 2. Current Focus
 ```bash
-cat psi/inbox/focus*.md 2>/dev/null | head -20
+cat psi/inbox/focus*.md | head -20
 ```
 
 ### 3. Schedule/Appointments
 ```bash
-cat psi/inbox/schedule.md 2>/dev/null | head -30
+cat psi/inbox/schedule.md | head -30
 ```
 
 ### 4. Recent Progress (24h)
@@ -55,7 +55,7 @@ git log --since="24 hours ago" --format="%h %s" | head -10
 
 ### 5. Latest Retrospective
 ```bash
-ls -t psi/memory/retrospectives/**/*.md 2>/dev/null | head -1
+ls -t psi/memory/retrospectives/**/*.md | head -1
 ```
 
 ---

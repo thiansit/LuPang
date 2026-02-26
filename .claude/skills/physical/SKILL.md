@@ -45,7 +45,7 @@ done
 
 if [ -z "$SCRIPT" ]; then
   # Fallback to slow search only if explicit paths fail
-  SCRIPT=$(find ~ -name location-query.ts -not -path "*/node_modules/*" 2>/dev/null | head -1)
+  SCRIPT=$(find ~ -name location-query.ts -not -path "*/node_modules/*" | head -1)
 fi
 
 if [ -z "$SCRIPT" ]; then

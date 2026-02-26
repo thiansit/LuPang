@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // spinoff.ts - Graduate project to its own repo
 import { $ } from "bun";
-import { existsSync, readlinkSync, unlinkSync, symlinkSync } from "fs";
+import { existsSync, rmSync, cpSync } from "fs";
 import { join } from "path";
 import { getRoot, getPaths, ghqPath, parseRepo } from "./utils.ts";
 
@@ -14,7 +14,7 @@ if (!slug || !target) {
 const ROOT = getRoot();
 const { incubateDir } = getPaths(ROOT);
 
-const incubatePath = join(ROOT, "ψ/incubate", slug);
+const incubatePath = join(ROOT, "psi/incubate", slug);
 
 if (!existsSync(incubatePath)) {
   console.error(`Not found: ${incubatePath}`);
@@ -22,7 +22,7 @@ if (!existsSync(incubatePath)) {
 }
 
 const sourcePath = existsSync(incubatePath) && 
-  (await Bun.file(incubatePath).exists() ? incubatePath : readlinkSync(incubatePath));
+  (await Bun.file(incubatePath).exists() ? incubatePath : incubatePath);
 
 const { owner, name } = parseRepo(target);
 const targetPath = ghqPath(owner, name);
@@ -52,8 +52,8 @@ await $`git -C ${targetPath} push origin main`.quiet().catch(() =>
 );
 
 // 5. Update symlink
-if (existsSync(incubatePath)) unlinkSync(incubatePath);
-symlinkSync(targetPath, incubatePath);
+if (existsSync(incubatePath)) rmSync(incubatePath, { recursive: true, force: true });
+cpSync(targetPath, incubatePath, { recursive: true });
 
 console.log(`\nSpinoff complete: ${slug} → ${target}`);
 console.log(`  GitHub: https://github.com/${target}`);

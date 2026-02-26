@@ -53,7 +53,7 @@ psi/learn/
 
 **Offload source, keep docs:**
 ```bash
-unlink psi/learn/owner/repo/origin   # Remove symlink
+rm -rf psi/learn/owner/repo/origin   # Remove symlink
 ghq rm owner/repo                  # Remove source
 # Docs remain in psi/learn/owner/repo/
 ```
@@ -69,8 +69,8 @@ while read repo; do
   ghq get -u "https://github.com/$repo"
   OWNER=$(dirname "$repo")
   REPO=$(basename "$repo")
-  mkdir -p "$ROOT/psi/learn/$OWNER/$REPO"
-  ln -sf "$(ghq root)/github.com/$repo" "$ROOT/psi/learn/$OWNER/$REPO/origin"
+  mkdir "$ROOT/psi/learn/$OWNER/$REPO"
+  git clone "$(ghq root)/github.com/$repo" "$ROOT/psi/learn/$OWNER/$REPO/origin"
   echo "✓ Restored: $repo"
 done < "$ROOT/psi/learn/.origins"
 ```
@@ -115,8 +115,8 @@ ghq get -u "$URL" && \
   GHQ_ROOT=$(ghq root) && \
   OWNER=$(echo "$URL" | sed -E 's|.*github.com/([^/]+)/.*|\1|') && \
   REPO=$(echo "$URL" | sed -E 's|.*/([^/]+)(\.git)?$|\1|') && \
-  mkdir -p "$ROOT/psi/learn/$OWNER/$REPO" && \
-  ln -sf "$GHQ_ROOT/github.com/$OWNER/$REPO" "$ROOT/psi/learn/$OWNER/$REPO/origin" && \
+  mkdir "$ROOT/psi/learn/$OWNER/$REPO" && \
+  git clone "$GHQ_ROOT/github.com/$OWNER/$REPO" "$ROOT/psi/learn/$OWNER/$REPO/origin" && \
   echo "$OWNER/$REPO" >> "$ROOT/psi/learn/.origins" && \
   sort -u -o "$ROOT/psi/learn/.origins" "$ROOT/psi/learn/.origins" && \
   echo "✓ Ready: $ROOT/psi/learn/$OWNER/$REPO/origin → source"
@@ -169,7 +169,7 @@ Example:
 
 1. Run the clone + symlink script in Step 0 FIRST
 2. Capture TIME: `date +%H%M` (e.g., 1349)
-3. Create the date folder: `mkdir -p "$DOCS_DIR"`
+3. Create the date folder: `mkdir "$DOCS_DIR"`
 4. Capture DOCS_DIR, SOURCE_DIR, and TIME as literal values
 5. THEN spawn agents with paths including TIME prefix
 

@@ -21,7 +21,7 @@ const lastCommit = (await $`git log --oneline -1`.text()).trim().slice(8, 68);
 // Focus state
 let focusState = "none";
 let focusTask = "No active focus";
-const focusFile = join(root, "ψ/inbox/focus-agent-main.md");
+const focusFile = join(root, "psi/inbox/focus-agent-main.md");
 if (existsSync(focusFile)) {
   const focusContent = await Bun.file(focusFile).text();
   const stateMatch = focusContent.match(/^STATE:\s*(.+)/m);
@@ -32,7 +32,7 @@ if (existsSync(focusFile)) {
 
 // Schedule
 let schedule = "No schedule";
-const scheduleFile = join(root, "ψ/inbox/schedule.md");
+const scheduleFile = join(root, "psi/inbox/schedule.md");
 if (existsSync(scheduleFile)) {
   const scheduleContent = await Bun.file(scheduleFile).text();
   const today = new Date();
@@ -45,19 +45,19 @@ if (existsSync(scheduleFile)) {
 }
 
 // Latest retro and handoff
-const monthDir = `ψ/memory/retrospectives/${new Date().toISOString().slice(0, 7)}`;
+const monthDir = `psi/memory/retrospectives/${new Date().toISOString().slice(0, 7)}`;
 let latestRetro = "none";
 let latestHandoff = "none";
 
 try {
-  const retros = (await $`ls -t ${monthDir}/*/*.md 2>/dev/null`.text()).trim().split('\n');
-  const retro = retros.find(f => !f.includes('CLAUDE'));
+  const retros = (await $`git ls-files ${monthDir} -- "*.md"`.text()).trim().split('\n');
+  const retro = retros.filter(f => f && !f.includes('CLAUDE')).pop();
   if (retro) latestRetro = retro.split('/').pop() || "none";
 } catch {}
 
 try {
-  const handoffs = (await $`ls -t ψ/inbox/handoff/*.md 2>/dev/null`.text()).trim().split('\n');
-  const handoff = handoffs.find(f => !f.includes('CLAUDE'));
+  const handoffs = (await $`git ls-files psi/inbox/handoff -- "*.md"`.text()).trim().split('\n');
+  const handoff = handoffs.filter(f => f && !f.includes('CLAUDE')).pop();
   if (handoff) latestHandoff = handoff.split('/').pop() || "none";
 } catch {}
 

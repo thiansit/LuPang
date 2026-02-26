@@ -34,8 +34,8 @@ Script reads retro summaries, handoff content, tracks, git state. Then LLM adds:
 Also check pulse context:
 
 ```bash
-cat psi/data/pulse/project.json 2>/dev/null
-cat psi/data/pulse/heartbeat.json 2>/dev/null
+cat psi/data/pulse/project.json
+cat psi/data/pulse/heartbeat.json
 ```
 
 If pulse data exists, add one line after the script output:
@@ -139,7 +139,7 @@ Same as `--now` but adds bigger picture context.
 1. Current session from AI memory
 2. Read latest handoff: ls -t psi/inbox/handoff/*.md | head -1
 3. Git status: git status --short
-4. Tracks: cat psi/inbox/tracks/INDEX.md 2>/dev/null
+4. Tracks: cat psi/inbox/tracks/INDEX.md
 ```
 
 ### Step 2: Output

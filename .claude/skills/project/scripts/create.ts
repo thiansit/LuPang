@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // create.ts - Create new GitHub repo, init, commit, push
 import { $ } from "bun";
-import { existsSync, mkdirSync, unlinkSync, symlinkSync } from "fs";
+import { existsSync, mkdirSync, rmSync, cpSync } from "fs";
 import { join } from "path";
 import { getRoot, getPaths, ghqPath } from "./utils.ts";
 
@@ -57,8 +57,8 @@ await $`git -C ${localPath} push -u origin main`.quiet()
 
 // 7. Create symlink
 mkdirSync(join(incubateDir, ORG), { recursive: true });
-if (existsSync(linkPath)) unlinkSync(linkPath);
-symlinkSync(localPath, linkPath);
+if (existsSync(linkPath)) rmSync(linkPath, { recursive: true, force: true });
+cpSync(localPath, linkPath, { recursive: true });
 
 console.log(`\nCreated: ${ORG}/${name} (${visibility})`);
 console.log(`  GitHub: https://github.com/${ORG}/${name}`);

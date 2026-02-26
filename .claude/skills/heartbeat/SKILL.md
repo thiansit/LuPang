@@ -32,7 +32,7 @@ cat psi/inbox/focus-agent-main.md
 git log --oneline -5 --since="24 hours ago"
 
 # Pending retrospective?
-ls psi/inbox/.pending-retrospective 2>/dev/null
+ls psi/inbox/.pending-retrospective
 ```
 
 ### 2. Generate Pulse Report

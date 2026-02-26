@@ -32,8 +32,8 @@ git log --oneline -10 && git diff --stat HEAD~5
 ### 1.5. Read Pulse Context (optional)
 
 ```bash
-cat psi/data/pulse/project.json 2>/dev/null
-cat psi/data/pulse/heartbeat.json 2>/dev/null
+cat psi/data/pulse/project.json
+cat psi/data/pulse/heartbeat.json
 ```
 
 If files don't exist, skip silently. Never fail because pulse data is missing.
@@ -48,7 +48,7 @@ If found, extract:
 **Path**: `psi/memory/retrospectives/YYYY-MM/DD/HH.MM_slug.md`
 
 ```bash
-mkdir -p "psi/memory/retrospectives/$(date +%Y-%m/%d)"
+mkdir "psi/memory/retrospectives/$(date +%Y-%m/%d)"
 ```
 
 Write immediately, no prompts. If pulse data was found, weave it into the narrative (don't add a separate dashboard). Include:

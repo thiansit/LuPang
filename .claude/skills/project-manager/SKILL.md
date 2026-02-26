@@ -33,7 +33,7 @@ ghq get -u https://github.com/owner/repo
 
 # 2. Create flat symlink (NOT nested!)
 GHQ_ROOT=$(ghq root)
-ln -sf "$GHQ_ROOT/github.com/owner/repo" psi/learn/repo-name
+git clone "$GHQ_ROOT/github.com/owner/repo" psi/learn/repo-name
 ```
 
 **Output**: "✓ Linked [repo] to psi/learn/repo-name"
@@ -46,7 +46,7 @@ Clone repo for **active development**.
 # Same flow, different target
 ghq get -u https://github.com/owner/repo
 GHQ_ROOT=$(ghq root)
-ln -sf "$GHQ_ROOT/github.com/owner/repo" psi/incubate/repo-name
+git clone "$GHQ_ROOT/github.com/owner/repo" psi/incubate/repo-name
 ```
 
 **Output**: "✓ Linked [repo] to psi/incubate/repo-name"
@@ -60,7 +60,7 @@ Search for project across all locations:
 ghq list | grep -i "query"
 
 # Search learn/incubate symlinks
-ls -la psi/learn/ psi/incubate/ 2>/dev/null | grep -i "query"
+ls -la psi/learn/ psi/incubate/ | grep -i "query"
 ```
 
 **Output**: List matches with their ghq paths
@@ -97,7 +97,7 @@ When listing, verify symlinks are valid:
 
 ```bash
 # Check for broken symlinks
-find psi/learn psi/incubate -type l ! -exec test -e {} \; -print 2>/dev/null
+find psi/learn psi/incubate -type l ! -exec test -e {} \; -print
 ```
 
 If broken: `ghq get -u [url]` to restore source.
@@ -108,12 +108,12 @@ If broken: `ghq get -u [url]` to restore source.
 # User shares URL
 User: "I want to learn from https://github.com/SawyerHood/dev-browser"
 → ghq get -u https://github.com/SawyerHood/dev-browser
-→ ln -sf ~/Code/github.com/SawyerHood/dev-browser psi/learn/dev-browser
+→ git clone ~/Code/github.com/SawyerHood/dev-browser psi/learn/dev-browser
 
 # User wants to develop
 User: "I want to contribute to claude-mem"
 → ghq get -u https://github.com/thedotmack/claude-mem
-→ ln -sf ~/Code/github.com/thedotmack/claude-mem psi/incubate/claude-mem
+→ git clone ~/Code/github.com/thedotmack/claude-mem psi/incubate/claude-mem
 ```
 
 ## Anti-Patterns
@@ -129,10 +129,10 @@ User: "I want to contribute to claude-mem"
 
 ```bash
 # Add to learn
-ghq get -u URL && ln -sf "$(ghq root)/github.com/owner/repo" psi/learn/name
+ghq get -u URL && git clone "$(ghq root)/github.com/owner/repo" psi/learn/name
 
 # Add to incubate
-ghq get -u URL && ln -sf "$(ghq root)/github.com/owner/repo" psi/incubate/name
+ghq get -u URL && git clone "$(ghq root)/github.com/owner/repo" psi/incubate/name
 
 # Update source
 ghq get -u URL

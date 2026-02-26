@@ -66,7 +66,7 @@ Read from environment and context:
 ```bash
 # Shell info
 echo "Shell: $SHELL"
-$SHELL --version 2>/dev/null | head -1
+$SHELL --version | head -1
 
 # OS info
 uname -s -r
