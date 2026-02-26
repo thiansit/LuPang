@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Ephemeral brain areas
+psi/active/*
+!psi/active/.gitkeep
+psi/incubate/*
+!psi/incubate/.gitkeep
+psi/learn/*
+!psi/learn/.gitkeep
+
+# Logs (keep structure, ignore content)
+psi/memory/logs/*.log
+psi/memory/logs/*.jsonl
+
+# Metrics data
+psi/memory/metrics/*.jsonl
+
+# Temp
+.tmp/
+*.pyc
+__pycache__/
+node_modules/
+.env
