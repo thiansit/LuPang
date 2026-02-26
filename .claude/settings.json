@@ -8,6 +8,7 @@
       "Bash(npx:*)",
       "Bash(python:*)",
       "Bash(pip:*)",
+      "Bash(bun:*)",
       "Bash(dir:*)",
       "Bash(type:*)",
       "Bash(where:*)",
@@ -29,7 +30,15 @@
       "Bash(tail:*)",
       "Bash(pwd:*)",
       "Bash(which:*)",
-      "Bash(code:*)"
+      "Bash(code:*)",
+      "Bash(*psi/*)",
+      "Skill(rrr)",
+      "Skill(recap)",
+      "Skill(trace)",
+      "Skill(learn)",
+      "Skill(project)",
+      "Skill(awaken)",
+      "Skill(worktree)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
@@ -39,5 +48,42 @@
       "Bash(git clean -f:*)"
     ],
     "ask": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-start.sh 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-end.sh 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/safety-check.sh 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/git-workflow-validator.sh 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
   }
 }
