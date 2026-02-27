@@ -64,6 +64,7 @@ services:
       - gitlab
     networks:
       - tunnel-net
+      - k3d-occ
 
 volumes:
   gitlab-config:
@@ -73,3 +74,5 @@ volumes:
 networks:
   tunnel-net:
     driver: bridge
+  k3d-occ:
+    external: true

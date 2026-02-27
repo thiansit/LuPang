@@ -18,4 +18,12 @@ ingress:
     service: http://cpb-client:3000
     originRequest:
       httpHostHeader: "cpbpoc.algoxpert.tech"
+  - hostname: occ-api.algoxpert.tech
+    service: http://k3d-occ-serverlb:80
+    originRequest:
+      httpHostHeader: "occ-api.algoxpert.tech"
+  - hostname: occ-grafana.algoxpert.tech
+    service: http://k3d-occ-serverlb:80
+    originRequest:
+      httpHostHeader: "occ-grafana.algoxpert.tech"
   - service: http_status:404
