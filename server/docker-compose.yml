@@ -1,0 +1,27 @@
+services:
+  ssh-server:
+    build: .
+    container_name: lupang-ssh
+    restart: unless-stopped
+    volumes:
+      - ./workspace:/home/dev/workspace
+      - ./authorized_keys:/tmp/authorized_keys:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - tunnel-net
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+    volumes:
+      - ./cloudflared-config.yml:/etc/cloudflared/config.yml:ro
+      - ./tunnel-creds.json:/etc/cloudflared/tunnel-creds.json:ro
+    depends_on:
+      - ssh-server
+    networks:
+      - tunnel-net
+
+networks:
+  tunnel-net:
+    driver: bridge

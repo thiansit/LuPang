@@ -1,0 +1,7 @@
+tunnel: 200bb57a-3a5d-4459-9f3d-9bb4c736d49f
+credentials-file: /etc/cloudflared/tunnel-creds.json
+
+ingress:
+  - hostname: ssh.algoxpert.tech
+    service: ssh://ssh-server:22
+  - service: http_status:404

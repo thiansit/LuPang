@@ -1,0 +1,6 @@
+# Secrets — never commit
+.env
+tunnel-creds.json
+
+# Workspace data
+workspace/
