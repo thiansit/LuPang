@@ -6,4 +6,16 @@ ingress:
     service: ssh://ssh-server:22
   - hostname: gitlab.algoxpert.tech
     service: http://gitlab:80
+    originRequest:
+      httpHostHeader: "gitlab.algoxpert.tech"
+  - hostname: git.algoxpert.tech
+    service: ssh://gitlab:22
+  - hostname: idempiere.algoxpert.tech
+    service: http://cpb-idempiere:8080
+    originRequest:
+      httpHostHeader: "idempiere.algoxpert.tech"
+  - hostname: cpbpoc.algoxpert.tech
+    service: http://cpb-client:3000
+    originRequest:
+      httpHostHeader: "cpbpoc.algoxpert.tech"
   - service: http_status:404

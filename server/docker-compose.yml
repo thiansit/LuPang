@@ -25,6 +25,23 @@ services:
         }
         gitlab_rails['gitlab_shell_ssh_port'] = 2224
         gitlab_rails['time_zone'] = 'Asia/Bangkok'
+        gitlab_rails['trusted_proxies'] = ['172.16.0.0/12', '10.0.0.0/8', '127.0.0.1']
+
+        # ลด RAM — ปิด services ที่ไม่จำเป็น
+        prometheus_monitoring['enable'] = false
+        alertmanager['enable'] = false
+        gitlab_exporter['enable'] = false
+        redis_exporter['enable'] = false
+        postgres_exporter['enable'] = false
+        node_exporter['enable'] = false
+
+        # ลด Puma workers
+        puma['worker_processes'] = 2
+        puma['min_threads'] = 1
+        puma['max_threads'] = 4
+
+        # ลด Sidekiq concurrency
+        sidekiq['concurrency'] = 5
     ports:
       - "2224:22"
     volumes:
