@@ -4,4 +4,6 @@ credentials-file: /etc/cloudflared/tunnel-creds.json
 ingress:
   - hostname: ssh.algoxpert.tech
     service: ssh://ssh-server:22
+  - hostname: gitlab.algoxpert.tech
+    service: http://gitlab:80
   - service: http_status:404

@@ -10,6 +10,31 @@ services:
     networks:
       - tunnel-net
 
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: lupang-gitlab
+    restart: unless-stopped
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.algoxpert.tech'
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['proxy_set_headers'] = {
+          "X-Forwarded-Proto" => "https",
+          "X-Forwarded-Ssl" => "on"
+        }
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        gitlab_rails['time_zone'] = 'Asia/Bangkok'
+    ports:
+      - "2224:22"
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+    shm_size: '256m'
+    networks:
+      - tunnel-net
+
   cloudflared:
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
@@ -19,8 +44,14 @@ services:
       - ./tunnel-creds.json:/etc/cloudflared/tunnel-creds.json:ro
     depends_on:
       - ssh-server
+      - gitlab
     networks:
       - tunnel-net
+
+volumes:
+  gitlab-config:
+  gitlab-logs:
+  gitlab-data:
 
 networks:
   tunnel-net:
