@@ -1,0 +1,18 @@
+[Unit]
+Description=cloudflared
+After=network-online.target gitlab-runsvdir.service k3s.service
+Wants=network-online.target
+
+[Service]
+TimeoutStartSec=60
+Type=simple
+# Wait 15s for backends (GitLab, k3s) to be ready before connecting tunnel
+ExecStartPre=/bin/sleep 15
+ExecStart=/usr/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+Restart=always
+RestartSec=10s
+# Disable watchdog — cloudflared doesn't send keepalive and gets SIGABRT
+WatchdogSec=0
+
+[Install]
+WantedBy=multi-user.target

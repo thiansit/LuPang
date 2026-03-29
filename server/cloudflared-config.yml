@@ -3,13 +3,13 @@ credentials-file: /etc/cloudflared/tunnel-creds.json
 
 ingress:
   - hostname: ssh.algoxpert.tech
-    service: ssh://ssh-server:22
+    service: tcp://localhost:2222
   - hostname: gitlab.algoxpert.tech
-    service: http://gitlab:80
+    service: http://localhost:8181
     originRequest:
       httpHostHeader: "gitlab.algoxpert.tech"
   - hostname: git.algoxpert.tech
-    service: ssh://gitlab:22
+    service: ssh://localhost:2224
   - hostname: idempiere.algoxpert.tech
     service: http://cpb-idempiere:8080
     originRequest:
@@ -30,4 +30,9 @@ ingress:
     service: http://k3d-occ-serverlb:80
     originRequest:
       httpHostHeader: "occ-grafana.algoxpert.tech"
+  - hostname: exchange-next.algoxpert.tech
+    service: http://mx-app:3000
   - service: http_status:404
+
+# Use http2 — quic causes crashes on WSL2 network
+protocol: http2
