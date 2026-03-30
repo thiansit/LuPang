@@ -1,6 +1,6 @@
 [Unit]
 Description=cloudflared
-After=network-online.target gitlab-runsvdir.service k3s.service
+After=network-online.target
 Wants=network-online.target
 # No restart limit — always try to recover
 StartLimitIntervalSec=0
@@ -11,7 +11,9 @@ Type=simple
 # Wait 15s for backends (GitLab, k3s) to be ready before connecting tunnel
 ExecStartPre=/bin/sleep 15
 ExecStart=/etc/cloudflared/run.sh
-Restart=on-failure
+# Restart=always (not on-failure) — systemctl restart sends SIGTERM (exit 0)
+# which on-failure would not catch, leaving tunnel permanently down
+Restart=always
 RestartSec=10s
 # Disable watchdog — cloudflared doesn't send keepalive and gets SIGABRT
 WatchdogSec=0

@@ -24,8 +24,7 @@ node_exporter['enable'] = false
 puma['worker_processes'] = 0
 puma['min_threads'] = 1
 puma['max_threads'] = 4
-# Disable Sidekiq — triggers Ruby bundle fork kernel BUG on WSL2 6.6.87.2
-sidekiq['enable'] = false
+sidekiq['enable'] = true
 sidekiq['concurrency'] = 5
 
 # Enable gitlab-sshd on port 2224
