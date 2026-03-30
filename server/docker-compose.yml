@@ -42,8 +42,13 @@ services:
 
         # ลด Sidekiq concurrency
         sidekiq['concurrency'] = 5
+
+        # เพิ่ม file size limit
+        gitlab_rails['max_attachment_size'] = 512
+        nginx['client_max_body_size'] = '512m'
     ports:
       - "2224:22"
+      - "127.0.0.1:8929:80"
     volumes:
       - gitlab-config:/etc/gitlab
       - gitlab-logs:/var/log/gitlab
@@ -51,6 +56,18 @@ services:
     shm_size: '256m'
     networks:
       - tunnel-net
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: lupang-gitlab-runner
+    restart: unless-stopped
+    volumes:
+      - ./gitlab-runner/config.toml:/etc/gitlab-runner/config.toml
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - tunnel-net
+    depends_on:
+      - gitlab
 
   cloudflared:
     image: cloudflare/cloudflared:latest

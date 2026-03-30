@@ -21,11 +21,16 @@ redis_exporter['enable'] = false
 postgres_exporter['enable'] = false
 node_exporter['enable'] = false
 
-puma['worker_processes'] = 2
+puma['worker_processes'] = 0
 puma['min_threads'] = 1
 puma['max_threads'] = 4
+# Disable Sidekiq — triggers Ruby bundle fork kernel BUG on WSL2 6.6.87.2
+sidekiq['enable'] = false
 sidekiq['concurrency'] = 5
 
 # Enable gitlab-sshd on port 2224
 gitlab_sshd['enable'] = true
 gitlab_sshd['listen_address'] = '[::]:2224'
+# Fix WSL2 cgroup hang: Go runtime reads /proc/self/cgroup causing D state
+# GOMAXPROCS set explicitly prevents automaxprocs from triggering cgroup read
+gitlab_sshd['env'] = { 'GOMAXPROCS' => '4' }
